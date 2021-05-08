@@ -22,4 +22,8 @@ export class ViewAppointmentPage implements OnInit {
     );
   }
 
+  goToHome(){
+    this.router.navigate(['']);
+  }
+
 }
