@@ -29,6 +29,14 @@ const routes: Routes = [
   {
     path: 'new-appointment',
     loadChildren: () => import('./new-appointment/new-appointment.module').then( m => m.NewAppointmentPageModule)
+  },
+  {
+    path: 'view-appointment',
+    loadChildren: () => import('./view-appointment/view-appointment.module').then( m => m.ViewAppointmentPageModule)
+  },
+  {
+    path: 'view-appointment/:uid',
+    loadChildren: () => import('./view-appointment/view-appointment.module').then( m => m.ViewAppointmentPageModule)
   }
 
 ];

@@ -1,0 +1,106 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
+    <ion-title>View Appointment</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <form>
+    <ion-item lines="full">
+      <ion-label position="floating">Symptoms</ion-label>
+      <ion-input type="text" name="Symptoms" required [(ngModel)]="appointment.Symptoms"></ion-input>
+    </ion-item>
+    <ion-item lines="full">
+      <ion-label position="floating">Temparature</ion-label>
+      <ion-input type="text" name="Temparature" required [(ngModel)]="appointment.Temparature"></ion-input>
+    </ion-item>
+    <ion-item lines="full">
+      <ion-label position="floating">Fever Peaks In (Hours)</ion-label>
+      <ion-input type="text" name="FeverPeaksIn" required [(ngModel)]="appointment.FeverPeaksIn"></ion-input>
+    </ion-item>
+    <ion-item lines="full">
+      <ion-label position="floating">Mucus Color & Texture</ion-label>
+      <ion-input type="text" name="MucusColorTexture" required [(ngModel)]="appointment.MucusColorTexture"></ion-input>
+    </ion-item>
+    <ion-item lines="full">
+      <ion-label position="floating">OXI Meter Reading</ion-label>
+      <ion-input type="text" name="OXIMeterReading" required [(ngModel)]="appointment.OXIMeterReading"></ion-input>
+    </ion-item>
+    <ion-item lines="full">
+      <ion-label position="floating">Peculiar Symptoms</ion-label>
+      <ion-input type="text" name="PeculiarSymptoms" required [(ngModel)]="appointment.PeculiarSymptoms"></ion-input>
+    </ion-item>
+    <ion-item lines="full">
+      <ion-label position="floating">Pulse Rate</ion-label>
+      <ion-input type="text" name="PulseRate" required [(ngModel)]="appointment.PulseRate"></ion-input>
+    </ion-item>
+    <ion-item lines="full">
+      <ion-label position="floating">Sleep Symptoms</ion-label>
+      <ion-input type="text" name="SleepSymptoms" required [(ngModel)]="appointment.SleepSymptoms"></ion-input>
+    </ion-item>
+    <ion-item lines="full">
+      <ion-label position="floating">Doctor Prescription</ion-label>
+      <ion-input type="text" name="DoctorPrescription" required [(ngModel)]="appointment.DoctorPrescription"></ion-input>
+    </ion-item>
+    <ion-list>
+      <ion-item>
+        <ion-label>Body Pains</ion-label>
+        <ion-toggle slot="start" name="BodyPains" [(ngModel)]="appointment.BodyPains"></ion-toggle>
+      </ion-item>
+      <ion-item>
+        <ion-label>Bretheless/Weesing</ion-label>
+        <ion-toggle slot="start" name="BrethelessWeesing" [(ngModel)]="appointment.BrethelessWeesing"></ion-toggle>
+      </ion-item>
+      <ion-item>
+        <ion-label>Chest Tightness</ion-label>
+        <ion-toggle slot="start" name="ChestTightness" [(ngModel)]="appointment.ChestTightness"></ion-toggle>
+      </ion-item>
+      <ion-item>
+        <ion-label>Cold</ion-label>
+        <ion-toggle slot="start" name="Cold" [(ngModel)]="appointment.Cold"></ion-toggle>
+      </ion-item>
+      <ion-item>
+        <ion-label>Cough</ion-label>
+        <ion-toggle slot="start" name="Cough" [(ngModel)]="appointment.Cough"></ion-toggle>
+      </ion-item>
+      <ion-item>
+        <ion-label>Cought Clipping</ion-label>
+        <ion-toggle slot="start" name="CoughtClipping" [(ngModel)]="appointment.CoughtClipping"></ion-toggle>
+      </ion-item>
+      <ion-item>
+        <ion-label>Diarrhoea</ion-label>
+        <ion-toggle slot="start" name="Diarrhoea" [(ngModel)]="appointment.Diarrhoea"></ion-toggle>
+      </ion-item>
+      <ion-item>
+        <ion-label>Drowsy</ion-label>
+        <ion-toggle slot="start" name="Drowsy" [(ngModel)]="appointment.Drowsy"></ion-toggle>
+      </ion-item>
+      <ion-item>
+        <ion-label>Fever With Chills</ion-label>
+        <ion-toggle slot="start" name="FeverWithChills" [(ngModel)]="appointment.FeverWithChills"></ion-toggle>
+      </ion-item>
+      <ion-item>
+        <ion-label>Nausea</ion-label>
+        <ion-toggle slot="start" name="Nausea" [(ngModel)]="appointment.Nausea"></ion-toggle>
+      </ion-item>
+      <ion-item>
+        <ion-label>Thirst</ion-label>
+        <ion-toggle slot="start" name="Thirst" [(ngModel)]="appointment.Thirst"></ion-toggle>
+      </ion-item>
+      <ion-item>
+        <ion-label>Tiered/Restlessness</ion-label>
+        <ion-toggle slot="start" name="TieredRestless" [(ngModel)]="appointment.TieredRestless"></ion-toggle>
+      </ion-item>
+    </ion-list>
+
+    <ion-row>
+      <ion-col>
+        <ion-button (click)="SaveAppointment()" color="primary" expand="block">Send To Doctor</ion-button>
+        <ion-button (click)="goToHome()" color="danger" expand="block">Cancel</ion-button>
+      </ion-col>
+    </ion-row>
+  </form>
+</ion-content>
