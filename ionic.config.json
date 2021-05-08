@@ -1,0 +1,7 @@
+{
+  "name": "covidHomeo",
+  "integrations": {
+    "cordova": {}
+  },
+  "type": "angular"
+}
