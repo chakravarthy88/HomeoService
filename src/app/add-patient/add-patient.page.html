@@ -7,45 +7,53 @@
   </ion-toolbar>
 </ion-header>
 
+
+<!-- uid: string;
+MailID: string;
+FirstName: string;
+LastName: string;
+Mobile: boolean;
+Age: number;
+Gender: string; -->
+
 <ion-content>
   <form>
     <ion-item lines="full">
-      <ion-label position="floating">Full Name</ion-label>
-      <ion-input type="text" required></ion-input>
+      <ion-label position="floating">First Name</ion-label>
+      <ion-input type="text" name="FirstName" required [(ngModel)]="patient.FirstName"></ion-input>
     </ion-item>
 
     <ion-item lines="full">
       <ion-label position="floating">Last name</ion-label>
-      <ion-input type="text" required></ion-input>
+      <ion-input type="text"  name="LastName" required  [(ngModel)]="patient.LastName"></ion-input>
     </ion-item>
 
     <ion-item lines="full">
       <ion-label position="floating">Mobile Number</ion-label>
-      <ion-input type="Number" required></ion-input>
+      <ion-input type="Number" name="Mobile" required  [(ngModel)]="patient.Mobile"></ion-input>
     </ion-item>
 
     <ion-item lines="full">
       <ion-label position="floating">Age</ion-label>
-      <ion-input type="Number" required></ion-input>
+      <ion-input type="Number" name="Age" required [(ngModel)]="patient.Age"></ion-input>
     </ion-item>
 
     <ion-item lines="full">
       <ion-label position="floating">Gender</ion-label>
       <ion-item>
         <ion-label>Male</ion-label>
-        <ion-radio slot="gender" value="Male"></ion-radio>
+        <ion-radio slot="gender" name="Gender" value="Male" [(ngModel)]="patient.Gender"></ion-radio>
       </ion-item>
-
       <ion-item>
         <ion-label>Female</ion-label>
-        <ion-radio slot="gender" value="Female"></ion-radio>
+        <ion-radio slot="gender" name="Gender" value="Female" [(ngModel)]="patient.Gender"></ion-radio>
       </ion-item>
     </ion-item>
 
     <ion-row>
       <ion-col>
-        <ion-button (click)="SavePatient()" color="Primary" expand="block">Save</ion-button>
-        <ion-button (click)="Cancel" color="danger" expand="block">Cancel</ion-button>
+        <ion-button (click)="SavePatient()" color="primary" expand="block">Save</ion-button>
+        <ion-button (click)="goToHome()" color="danger" expand="block">Cancel</ion-button>
       </ion-col>
     </ion-row>
   </form>

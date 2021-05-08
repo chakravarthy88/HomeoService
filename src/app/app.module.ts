@@ -12,7 +12,8 @@ import { AngularFireAuthModule } from '@angular/fire/auth';
 import { AngularFireDatabaseModule } from '@angular/fire/database';
 import { AngularFirestoreModule } from '@angular/fire/firestore';
 import { environment } from '../environments/environment';
-import {TabsPageRoutingModule} from '../app/tabs/tabs-routing.module';
+import {  TabsPageRoutingModule } from '../app/tabs/tabs-routing.module';
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [AppComponent],
@@ -21,10 +22,9 @@ import {TabsPageRoutingModule} from '../app/tabs/tabs-routing.module';
     AngularFireModule.initializeApp(environment.firebaseConfig),
     AngularFireAuthModule,
     AngularFireDatabaseModule,
-    AngularFirestoreModule
-  
+    AngularFirestoreModule  
   ],
-  providers: [{ provide: RouteReuseStrategy, useClass: IonicRouteStrategy }, AngularFirestoreModule],
+  providers: [{ provide: RouteReuseStrategy, useClass: IonicRouteStrategy }, AngularFirestoreModule, FormsModule],
   bootstrap: [AppComponent],
 }) 
 export class AppModule {}

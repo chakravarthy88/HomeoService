@@ -21,6 +21,14 @@ const routes: Routes = [
   {
     path: 'add-patient',
     loadChildren: () => import('./add-patient/add-patient.module').then( m => m.AddPatientPageModule)
+  },
+  {
+    path: 'new-appointment/:uid',
+    loadChildren: () => import('./new-appointment/new-appointment.module').then( m => m.NewAppointmentPageModule)
+  },
+  {
+    path: 'new-appointment',
+    loadChildren: () => import('./new-appointment/new-appointment.module').then( m => m.NewAppointmentPageModule)
   }
 
 ];

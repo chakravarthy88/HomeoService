@@ -8,10 +8,9 @@
 
 <ion-content [fullscreen]="true">
   <ion-list>
-    <ion-item *ngFor="let user of patientService.patients">
-      <ion-label>Pokémon Yellow</ion-label>
+    <ion-item *ngFor="let patient of patients">
+      <ion-label>{{patient.FirstName}}, {{patient.LastName}} - {{patient.Mobile}}</ion-label>
+      <ion-button (click)="NewAppointment(patient.uid)" color="primary" expand="block" class="fa fa-stethoscope"><ion-icon name="alarm-outline"></ion-icon></ion-button>
     </ion-item>
   </ion-list>
-<!-- 
-  <app-explore-container name="Tab 1 page"></app-explore-container> -->
 </ion-content>
