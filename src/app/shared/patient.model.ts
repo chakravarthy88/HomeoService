@@ -1,6 +1,6 @@
 export interface Patient {
     uid: string;
-    Email: string;
+    MailID: string;
     FirstName: string;
     LastName: string;
     Mobile: boolean;
