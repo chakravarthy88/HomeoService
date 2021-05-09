@@ -36,6 +36,7 @@ export class NewAppointmentPage implements OnInit {
         this.appointment.LockedBy = "";
         this.appointment.AppointmentClosed = false;
         this.appointment.PatientID = this.uid;
+        // this.appointment.PatientName = ""
         this.appointment.PatientInfo = this.patientInfo;
         this.appointment.SymptomDate  = new Date();
         this.appointment.L1Reviewed = false;
