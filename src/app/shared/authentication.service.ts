@@ -37,7 +37,9 @@ export class AuthenticationService {
 
   getUserRole()
   {
-    return JSON.parse(localStorage.getItem('UserData')).userDataInDB.role;
+    var userData = JSON.parse(localStorage.getItem('UserData'))
+    if(userData != undefined)
+      return userData.userDataInDB.role;
   }
 
   // Login in with email/password

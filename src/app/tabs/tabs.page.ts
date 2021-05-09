@@ -1,8 +1,8 @@
 import { Component } from '@angular/core';
 import { Router, Navigation} from '@angular/router';
 import { NavController } from '@ionic/angular';
-import { LoginPage } from '../login/login.page';
 import { MainService } from "../shared/main.service";
+import { AuthenticationService } from "../shared/authentication.service";
 
 @Component({
   selector: 'app-tabs',
@@ -11,18 +11,24 @@ import { MainService } from "../shared/main.service";
 })
 export class TabsPage {
 
+  public isL1: boolean = false;
+  public isL2: boolean = false;
+  
   constructor(
-    public navCtrl: NavController,
-    public router: Router,
-    public service: MainService
+    private navCtrl: NavController,
+    private router: Router,
+    private aservice: AuthenticationService,
+    private service: MainService
   ) {}
 
-  ngOnInit() {
+
+  ionViewWillEnter() {
+    this.isL1 = this.aservice.getUserRole() == 2 ? true : false;
+    this.isL2 = this.aservice.getUserRole() == 3 ? true : false;
     if(JSON.parse(localStorage.getItem('User')) == null)
     {
        this.router.navigate(['login']);
-    }
-    
+    }    
   }
 
   AddNewPatient(){
