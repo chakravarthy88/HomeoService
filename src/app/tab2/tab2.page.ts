@@ -13,6 +13,7 @@ export class Tab2Page {
   public appointments: any[] = [];
   public isL1: boolean = false;
   public isL2: boolean = false;
+  public showClosed: boolean = false;
   
   constructor(private service: MainService, private aservice: AuthenticationService, private router: Router) {}
 
@@ -26,6 +27,7 @@ export class Tab2Page {
 
   setPageStateByRole()
   {
+    this.appointments = [];
     this.isL1 = this.aservice.getUserRole() == 2 ? true : false;
     this.isL2 = this.aservice.getUserRole() == 3 ? true : false;
       if(this.isL1)

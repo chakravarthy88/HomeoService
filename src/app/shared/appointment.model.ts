@@ -10,7 +10,7 @@ export interface Appointment {
     ReviewStatus: string;
     LockedBy: boolean;
 
-    MailID: string;
+    //MailID: string;
     MucusColorTexture: string;
     OXIMeterReading: string;
     PatientName: string;

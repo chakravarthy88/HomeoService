@@ -42,7 +42,7 @@ export class NewAppointmentPage implements OnInit {
 
     console.log(this.appointment);
 
-    var userData = JSON.parse(localStorage.getItem('user'));
+    var userData = JSON.parse(localStorage.getItem('UserData'));
     this.getPatientById(this.aRouter.snapshot.paramMap.get('uid')).subscribe(res =>
       {
         this.patientInfo = res;
@@ -59,7 +59,7 @@ export class NewAppointmentPage implements OnInit {
         this.appointment.DoctorPrescription = "";
 
         //this.appointment.uid = this.aRouter.snapshot.paramMap.get('uid');//this.uid;
-        this.appointment.MailID = userData.email;
+        //this.appointment.MailID = userData.email;
         this.appointment.RegisteredBy = userData.uid;
 
         this.service.SaveAppointment(this.appointment);

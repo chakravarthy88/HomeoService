@@ -191,7 +191,7 @@ export class MainService {
       FeverPeaksIn: data.FeverPeaksIn,
       ReviewStatus: data.ReviewStatus,
       LockedBy: data.LockedBy,
-      MailID: data.MailID,
+      //MailID: data.MailID,
       MucusColorTexture: data.MucusColorTexture,
       OXIMeterReading: data.OXIMeterReading,
       PatientID: data.PatientID,
