@@ -29,15 +29,15 @@ export class MainService {
   }
 
   getUserData() {
-    return JSON.parse(localStorage.getItem('user'));
+    return JSON.parse(localStorage.getItem('UserData'));
   }
 
   SavePatient(patient) {
     return this.afStore.collection('Patients').add(patient);
   }
 
-  SaveAppointment(patient) {
-    return this.afStore.collection('Appointments').add(patient);
+  SaveAppointment(appoint) {
+    return this.afStore.collection('Appointments').add(appoint);
   }
 
   updateUser(user: Patient) {
@@ -60,11 +60,11 @@ export class MainService {
     return this.patients;
   }
 
-  getNewAppointments() {
+  getL1Appointments() {
     console.log('loading-appoints');
     this.appoints = [];
     this.afStore
-      .collection('Appointments', ref => ref.where("L1Reviewed", "==", false))
+      .collection('Appointments', ref => ref.where("ReviewStatus", "==", "ReadyForReview"))
       .get()
       .subscribe(a => {
         a.forEach(aa =>
@@ -73,10 +73,22 @@ export class MainService {
       });
     console.log(this.appoints);
     return this.appoints;
+  }
 
-    // return this.afStore
-    //   .collection('', ref => ref.where("L1Reviewed", "==", false))
-    //   .get();
+  getL2Appointments() {
+    console.log('loading-appoints');
+    this.appoints = [];
+
+    this.afStore
+      .collection('Appointments', ref => ref.where("ReviewStatus", "==", "L1ReviewCompleted"))
+      .get()
+      .subscribe(a => {
+        a.forEach(aa =>
+          this.appoints.push(this.buildAppointment(aa.data(), aa))
+        )
+      });
+    console.log(this.appoints);
+    return this.appoints;
   }
 
   getPatientById(uid) {
@@ -93,15 +105,66 @@ export class MainService {
       .valueChanges();
   }
 
-  sendToDoctor() {
-    // return this.angularFirestore
-    //     .collection("user-collection")
-    //     .doc(id)
-    //     .update({
-    //       name: user.name,
-    //       email: user.email,
-    //       contact: user.contact
-    //     });
+  sendToDoctor(appointment, uid) {
+    this.afStore.collection("Appointments").doc(uid).update({
+      Symptoms: appointment.Symptoms,
+      Temparature: appointment.Temparature,
+      FeverPeaksIn: appointment.FeverPeaksIn,
+      ReviewStatus: "L1ReviewCompleted",
+      LockedBy:  "",
+      MucusColorTexture: appointment.MucusColorTexture,
+      OXIMeterReading: appointment.OXIMeterReading,
+      PeculiarSymptoms: appointment.PeculiarSymptoms,
+      PulseRate: appointment.PulseRate,
+      SleepSymptoms: appointment.SleepSymptoms,
+      BodyPains: appointment.BodyPains,
+      BrethelessWeesing: appointment.BrethelessWeesing,
+      ChestTightness: appointment.ChestTightness,
+      Cold: appointment.Cold,
+      Cough: appointment.Cough,
+      CoughtClipping: appointment.CoughtClipping,
+      Diarrhoea: appointment.Diarrhoea,
+      Drowsy: appointment.Drowsy,
+      FeverWithChills: appointment.FeverWithChills,
+      Nausea: appointment.Nausea,
+      Thirst: appointment.Thirst,
+      TieredRestless: appointment.TieredRestless
+    });
+    this.router.navigate(['']);
+  }
+
+  tagDoctor(uid, name){
+    this.afStore.collection("Patients").doc(uid).update({
+      TaggedDoctor: name
+    });
+  }
+
+  completeReview(appointment, uid) {
+    this.afStore.collection("Appointments").doc(uid).update({
+      Symptoms: appointment.Symptoms,
+      Temparature: appointment.Temparature,
+      FeverPeaksIn: appointment.FeverPeaksIn,
+      ReviewStatus: "L2ReviewCompleted",
+      LockedBy:  "",
+      MucusColorTexture: appointment.MucusColorTexture,
+      OXIMeterReading: appointment.OXIMeterReading,
+      PeculiarSymptoms: appointment.PeculiarSymptoms,
+      PulseRate: appointment.PulseRate,
+      SleepSymptoms: appointment.SleepSymptoms,
+      BodyPains: appointment.BodyPains,
+      BrethelessWeesing: appointment.BrethelessWeesing,
+      ChestTightness: appointment.ChestTightness,
+      Cold: appointment.Cold,
+      Cough: appointment.Cough,
+      CoughtClipping: appointment.CoughtClipping,
+      Diarrhoea: appointment.Diarrhoea,
+      Drowsy: appointment.Drowsy,
+      FeverWithChills: appointment.FeverWithChills,
+      Nausea: appointment.Nausea,
+      Thirst: appointment.Thirst,
+      TieredRestless: appointment.TieredRestless
+    });
+    this.router.navigate(['']);
   }
 
   buildPatient(data, doc) {
@@ -111,8 +174,10 @@ export class MainService {
       FirstName: data.FirstName,
       LastName: data.LastName,
       Mobile: data.Mobile,
+      AltMobile: data.AltMobile,
       Age: data.Age,
-      Gender: data.Gender
+      Gender: data.Gender,
+      TaggedDoctor: data.TaggedDoctor
     };
     return patientInfo;
   }
@@ -124,9 +189,7 @@ export class MainService {
       ContactNumber: data.ContactNumber,
       DoctorPrescription: data.DoctorPrescription,
       FeverPeaksIn: data.FeverPeaksIn,
-      L1ExplainedMedicine: data.L1ExplainedMedicine,
-      L1Reviewed: data.L1Reviewed,
-      L2Reviewed: data.L2Reviewed,
+      ReviewStatus: data.ReviewStatus,
       LockedBy: data.LockedBy,
       MailID: data.MailID,
       MucusColorTexture: data.MucusColorTexture,
@@ -139,7 +202,19 @@ export class MainService {
       SleepSymptoms: data.SleepSymptoms,
       SymptomDate: data.SymptomDate,
       Symptoms: data.Symptoms,
-      Temparature: data.Temparature
+      Temparature: data.Temparature,
+      BodyPains: data.BodyPains,
+      BrethelessWeesing: data.BrethelessWeesing,
+      ChestTightness: data.ChestTightness,
+      Cold: data.Cold,
+      Cough: data.Cough,
+      CoughtClipping: data.CoughtClipping,
+      Diarrhoea: data.Diarrhoea,
+      Drowsy: data.Drowsy,
+      FeverWithChills: data.FeverWithChills,
+      Nausea: data.Nausea,
+      Thirst: data.Thirst,
+      TieredRestless: data.TieredRestless
     };
     return appointmentInfo;
   }

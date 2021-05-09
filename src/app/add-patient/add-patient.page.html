@@ -34,6 +34,11 @@ Gender: string; -->
     </ion-item>
 
     <ion-item lines="full">
+      <ion-label position="floating">Alternative Mobile Number</ion-label>
+      <ion-input type="Number" name="AltMobile" required  [(ngModel)]="patient.AltMobile"></ion-input>
+    </ion-item>
+
+    <ion-item lines="full">
       <ion-label position="floating">Age</ion-label>
       <ion-input type="Number" name="Age" required [(ngModel)]="patient.Age"></ion-input>
     </ion-item>

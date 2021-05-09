@@ -1,6 +1,6 @@
 import { Injectable, NgZone } from '@angular/core';
 import firebase from 'firebase/app';
-import { User } from "./user.model";
+import { User } from "./User.model";
 import { Router } from "@angular/router";
 import { AngularFireAuth } from "@angular/fire/auth";
 import { AngularFirestore, AngularFirestoreDocument } from '@angular/fire/firestore';
@@ -10,7 +10,7 @@ import { AngularFirestore, AngularFirestoreDocument } from '@angular/fire/firest
 })
 
 export class AuthenticationService {
-  userData: any;
+  public userData: any = {};
 
   constructor(
     public afStore: AngularFirestore,
@@ -18,16 +18,26 @@ export class AuthenticationService {
     public router: Router,  
     public ngZone: NgZone 
   ) {
-    this.ngFireAuth.authState.subscribe(user => {
-      if (user) {
-        this.userData = user;
-        localStorage.setItem('user', JSON.stringify(this.userData));
-        JSON.parse(localStorage.getItem('user'));
+    this.ngFireAuth.authState.subscribe(User => {
+      if (User) {
+        this.userData = User;
+        localStorage.setItem('User', JSON.stringify(this.userData));
+        // JSON.parse(localStorage.getItem('User'));
       } else {
-        localStorage.setItem('user', null);
-        JSON.parse(localStorage.getItem('user'));
+        localStorage.setItem('User', null);
+        // JSON.parse(localStorage.getItem('User'));
       }
     })
+  }
+
+  getUserData()
+  {
+    return JSON.parse(localStorage.getItem('UserData'));
+  }
+
+  getUserRole()
+  {
+    return JSON.parse(localStorage.getItem('UserData')).userDataInDB.role;
   }
 
   // Login in with email/password
@@ -35,7 +45,7 @@ export class AuthenticationService {
     return this.ngFireAuth.signInWithEmailAndPassword(email, password)
   }
 
-  // Register user with email/password
+  // Register User with email/password
   RegisterUser(email, password) {
     return this.ngFireAuth.createUserWithEmailAndPassword(email, password)
   }
@@ -57,16 +67,16 @@ export class AuthenticationService {
     // })
   }
 
-  // Returns true when user is looged in
+  // Returns true when User is looged in
   get isLoggedIn(): boolean {
-    const user = JSON.parse(localStorage.getItem('user'));
-    return (user !== null && user.emailVerified !== false) ? true : false;
+    const User = JSON.parse(localStorage.getItem('User'));
+    return (User !== null && User.emailVerified !== false) ? true : false;
   }
 
-  // Returns true when user's email is verified
+  // Returns true when User's email is verified
   get isEmailVerified(): boolean {
-    const user = JSON.parse(localStorage.getItem('user'));
-    return (user.emailVerified !== false) ? true : false;
+    const User = JSON.parse(localStorage.getItem('User'));
+    return (User.emailVerified !== false) ? true : false;
   }
 
   // Sign in with Gmail
@@ -91,26 +101,43 @@ export class AuthenticationService {
     })
   }
 
-  // Store user in localStorage 
-  SetUserData(user) {
-    // alert(user);
-    const userRef: AngularFirestoreDocument<any> = this.afStore.doc(`users/${user.uid}`);
-    const userData: User = {
-      uid: user.uid,
-      email: user.email,
-      displayName: user.displayName,
-      photoURL: user.photoURL,
-      emailVerified: user.emailVerified
+  // Store User in localStorage 
+  SetUserData(User) {
+
+    const userRef: AngularFirestoreDocument<any> = this.afStore.doc(`users/${User.uid}`);
+    const userData = {
+      uid: User.uid,
+      email: User.email,
+      displayName: User.displayName,
+      photoURL: User.photoURL,
+      emailVerified: User.emailVerified
     }
-    return userRef.set(userData, {
+    userRef.set(userData, {
       merge: true
     })
+
+    this.afStore
+      .collection('Users')
+      .doc(User.uid)
+      .valueChanges()
+      .subscribe(a => {
+
+        this.userData = {
+          uid: User.uid,
+          email: User.email,
+          displayName: User.displayName,
+          photoURL: User.photoURL,
+          emailVerified: User.emailVerified,
+          userDataInDB: a
+        }
+        localStorage.setItem('UserData', JSON.stringify(this.userData));
+      });
   }
 
   // Sign-out 
   SignOut() {
     return this.ngFireAuth.signOut().then(() => {
-      localStorage.removeItem('user');
+      localStorage.removeItem('User');
       this.router.navigate(['login']);
     })
   }

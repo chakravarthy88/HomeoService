@@ -22,7 +22,7 @@ export class TabsPage {
     {
        //alert("nouser");
 
-       this.router.navigate(['login']);
+       //this.router.navigate(['login']);
     }
     
   }

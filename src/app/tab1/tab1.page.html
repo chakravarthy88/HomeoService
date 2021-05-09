@@ -8,9 +8,18 @@
 
 <ion-content [fullscreen]="true">
   <ion-list>
-    <ion-item *ngFor="let patient of patients">
-      <ion-label>{{patient.FirstName}}, {{patient.LastName}} - {{patient.Mobile}}</ion-label>
+    <ion-card *ngFor="let patient of patients">
+      <ion-card-header>
+        <ion-card-subtitle>{{patient.FirstName}}, {{patient.LastName}} - {{patient.Mobile}}</ion-card-subtitle>
+        <ion-card-title>{{patient.TaggedDoctor}}</ion-card-title>
+      </ion-card-header>    
+      <ion-card-content>
+        <ion-button (click)="NewAppointment(patient.uid)" color="primary" class="fa fa-stethoscope"><ion-icon name="alarm-outline"></ion-icon></ion-button>
+      </ion-card-content>
+    </ion-card>
+    <!-- <ion-item *ngFor="let patient of patients">
+      <ion-label></ion-label>
       <ion-button (click)="NewAppointment(patient.uid)" color="primary" expand="block" class="fa fa-stethoscope"><ion-icon name="alarm-outline"></ion-icon></ion-button>
-    </ion-item>
+    </ion-item> -->
   </ion-list>
 </ion-content>

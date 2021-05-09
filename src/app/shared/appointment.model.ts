@@ -1,17 +1,18 @@
 export interface Appointment {
     uid: string;
+    PatientID: string;
     AppointmentClosed: string;
     ContactNumber: string;
     DoctorPrescription: string;
     FeverPeaksIn: string;
-    L1ExplainedMedicine: string;
-    L1Reviewed: string;
-    L2Reviewed: string;
-    LockedBy: string;
+    
+
+    ReviewStatus: string;
+    LockedBy: boolean;
+
     MailID: string;
     MucusColorTexture: string;
     OXIMeterReading: string;
-    PatientID: string;
     PatientName: string;
     PeculiarSymptoms: string;
     PulseRate: string;
@@ -20,4 +21,17 @@ export interface Appointment {
     SymptomDate: string;
     Symptoms: string;
     Temparature: string;
+    
+    BodyPains: boolean;
+    BrethelessWeesing: boolean;
+    ChestTightness: boolean;
+    Cold: boolean;
+    Cough: boolean;
+    CoughtClipping: boolean;
+    Diarrhoea: boolean;
+    Drowsy: boolean;
+    FeverWithChills: boolean;
+    Nausea: boolean;
+    Thirst: boolean;
+    TieredRestless: boolean;
 }

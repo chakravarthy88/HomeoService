@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { Router, ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-tab3',
@@ -7,6 +8,14 @@ import { Component } from '@angular/core';
 })
 export class Tab3Page {
 
-  constructor() {}
+  constructor(private router: Router) {
+    //this.router.navigate(['login']);
+  }
+
+  ngOnInit() {
+    // localStorage.removeItem("User");
+    // localStorage.removeItem("UserData");
+    // this.router.navigate(['login']);
+  }
 
 }

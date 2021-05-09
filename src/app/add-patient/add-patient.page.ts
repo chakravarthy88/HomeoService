@@ -29,6 +29,7 @@ export class AddPatientPage implements OnInit {
     var userData = JSON.parse(localStorage.getItem('user'));
     this.patient.MailID = userData.email;
     this.patient.RegisteredBy = userData.uid;
+    this.patient.TaggedDoctor = "Not Tagged to Doctor";
 
     this.svc.SavePatient(this.patient);
     this.router.navigate(['']);
