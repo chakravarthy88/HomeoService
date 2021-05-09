@@ -16,6 +16,7 @@ export class Tab2Page {
   public isL1: boolean = false;
   public isL2: boolean = false;
   public showClosed: boolean = false;
+  public userUID: boolean = false;
 
   constructor(private service: MainService, private aservice: AuthenticationService, private router: Router, private alertCtrl: AlertController) { }
 
@@ -24,6 +25,7 @@ export class Tab2Page {
   }
 
   ionViewWillEnter() {
+    this.userUID = this.aservice.getUserData().uid;
     this.setPageStateByRole();
   }
 
@@ -40,7 +42,7 @@ export class Tab2Page {
   async LockAppointment(uid) {
     const al = await this.alertCtrl.create({
       header: 'Are you sure?',
-      message: 'This item will be locked for you, please the case without fail or unlock case. Are you sure?',
+      message: 'This item will be locked for you, please complete the case without fail or unlock case. Are you sure?',
       buttons: [
         { text: 'No', role: 'Cancel' },
         {

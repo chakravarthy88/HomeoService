@@ -96,7 +96,7 @@ export class AuthenticationService {
     .then((result) => {
        this.ngZone.run(() => {
           this.SetUserData(result.user);
-          this.router.navigate(['']);
+          this.router.navigateByUrl('/tabs');
         })
     }).catch((error) => {
       window.alert(error)
@@ -104,26 +104,25 @@ export class AuthenticationService {
   }
 
   // Store User in localStorage 
-  SetUserData(User) {
+  async SetUserData(User) {
 
-    const userRef: AngularFirestoreDocument<any> = this.afStore.doc(`Users/${User.uid}`);
-    const userData = {
-      uid: User.uid,
-      email: User.email,
-      displayName: User.displayName,
-      photoURL: User.photoURL,
-      emailVerified: User.emailVerified
-    }
-    userRef.set(userData, {
-      merge: true
-    })
+    // const userRef: AngularFirestoreDocument<any> = this.afStore.doc(`Users/${User.uid}`);
+    // const userData = {
+    //   uid: User.uid,
+    //   email: User.email,
+    //   displayName: User.displayName,
+    //   photoURL: User.photoURL,
+    //   emailVerified: User.emailVerified
+    // }
+    // userRef.set(userData, {
+    //   merge: true
+    // })
 
-    this.afStore
+    await this.afStore
       .collection('Users')
       .doc(User.uid)
       .valueChanges()
       .subscribe(a => {
-
         this.userData = {
           uid: User.uid,
           email: User.email,
@@ -132,6 +131,7 @@ export class AuthenticationService {
           emailVerified: User.emailVerified,
           userDataInDB: a
         }
+        localStorage.setItem('User', this.userData)
         localStorage.setItem('UserData', JSON.stringify(this.userData));
       });
   }
@@ -139,7 +139,8 @@ export class AuthenticationService {
   // Sign-out 
   SignOut() {
     return this.ngFireAuth.signOut().then(() => {
-      localStorage.removeItem('User');
+      localStorage.removeItem("User");
+      localStorage.removeItem("UserData");
       this.router.navigate(['login']);
     })
   }

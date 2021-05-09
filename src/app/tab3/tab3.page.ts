@@ -13,9 +13,9 @@ export class Tab3Page {
   }
 
   ngOnInit() {
-    localStorage.removeItem("User");
-    localStorage.removeItem("UserData");
-    this.router.navigate(['login']);
+    // localStorage.removeItem("User");
+    // localStorage.removeItem("UserData");
+    //this.router.navigate(['login']);
   }
 
 }

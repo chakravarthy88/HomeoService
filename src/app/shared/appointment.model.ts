@@ -22,6 +22,7 @@ export interface Appointment {
     Symptoms: string;
     Temparature: string;
     
+    IsAcquirable: boolean;
     BodyPains: boolean;
     BrethelessWeesing: boolean;
     ChestTightness: boolean;

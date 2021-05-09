@@ -25,10 +25,15 @@ export class TabsPage {
   ionViewWillEnter() {
     this.isL1 = this.aservice.getUserRole() == 2 ? true : false;
     this.isL2 = this.aservice.getUserRole() == 3 ? true : false;
-    if(JSON.parse(localStorage.getItem('User')) == null)
-    {
-       this.router.navigate(['login']);
-    }    
+  }
+
+  ionViewDidEnter() {
+    // var uData = this.aservice.getUserData();    
+    // if(uData == null || uData.userDataInDB == undefined)
+    // {
+    //   console.log('wrong-login')
+    //   this.router.navigate(['login']);
+    // }
   }
 
   AddNewPatient(){
@@ -45,9 +50,8 @@ export class TabsPage {
   }
   
   Logout(){
-    localStorage.removeItem("User");
-    localStorage.removeItem("UserData");
-    this.router.navigate(['login']);
+    this.aservice.SignOut();
+    //this.router.navigate(['login']);
   }
 
 }

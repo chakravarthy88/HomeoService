@@ -15,8 +15,7 @@ export class ViewAppointmentPage implements OnInit {
   public isL1: boolean = false;
   public isL2: boolean = false;
   public patientInfo: any = {};
-  public uid: any;
-  public isLocked: boolean;
+  public apptUID: any;
 
   constructor(private service: MainService,
     private aservice: AuthenticationService,
@@ -27,18 +26,17 @@ export class ViewAppointmentPage implements OnInit {
 
   ngOnInit() {
     this.setRoles();
-    this.uid = this.aRouter.snapshot.paramMap.get('uid');
-    this.service.getAppointmentId(this.uid).subscribe(res => {
+    this.apptUID = this.aRouter.snapshot.paramMap.get('uid');
+    this.service.getAppointmentId(this.apptUID).subscribe(res => {
       this.appointment = res;
-      if (this.appointment.LockedBy != "") {
-        this.isLocked = true;
+      this.appointment.IsAcquirable = this.appointment.LockedBy == '' || this.appointment.LockedBy == this.service.getUserUID();
+      if (!this.appointment.IsAcquirable) {
         this.AppointmentNotAvailable();
       }
       else{
-        debugger;
         var userData = JSON.parse(localStorage.getItem('UserData'))
-        var uid = userData.userDataInDB.uid;
-        this.service.LockAppointment(this.appointment, uid);
+        var userUID = userData.userDataInDB.uid;
+        this.service.LockAppointment(this.apptUID, userUID);
       }
     });
   }

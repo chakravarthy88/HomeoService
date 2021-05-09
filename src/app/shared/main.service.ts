@@ -26,10 +26,19 @@ export class MainService {
     public ngZone: NgZone,
     private db: AngularFireDatabase
   ) {
+    // if(uData == null || uData.userDataInDB == undefined)
+    // {
+    //   console.log('wrong-login')
+    //   this.router.navigate(['login']);
+    // }
   }
 
   getUserData() {
     return JSON.parse(localStorage.getItem('UserData'));
+  }
+
+  getUserUID() {
+    return this.getUserData().userDataInDB.uid;
   }
 
   SavePatient(patient) {
@@ -114,9 +123,9 @@ export class MainService {
     this.router.navigate(['tabs']);
   }
 
-  LockAppointment(appt, uid){
-    this.afStore.collection("Appointments").doc(appt.uid).update({
-      LockedBy: uid
+  LockAppointment(apptUID, userID){
+    this.afStore.collection("Appointments").doc(apptUID).update({
+      LockedBy: userID
     })
   }
 
@@ -213,7 +222,7 @@ export class MainService {
       FeverPeaksIn: data.FeverPeaksIn,
       ReviewStatus: data.ReviewStatus,
       LockedBy: data.LockedBy,
-      //MailID: data.MailID,
+      IsAcquirable: data.LockedBy == '' || data.LockedBy == this.getUserUID(),
       MucusColorTexture: data.MucusColorTexture,
       OXIMeterReading: data.OXIMeterReading,
       PatientID: data.PatientID,

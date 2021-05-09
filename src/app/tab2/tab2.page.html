@@ -9,7 +9,7 @@
   <ion-list>
     <ion-item *ngFor="let appoint of appointments">
       <ion-label>{{appoint.PatientName}} - {{appoint.ReviewStatus}}</ion-label>
-      <ion-button (click)="LockAppointment(appoint.uid)" color="primary" expand="block" class="fa fa-stethoscope">
+      <ion-button *ngIf="appoint.IsAcquirable" (click)="LockAppointment(appoint.uid)" color="primary" expand="block" class="fa fa-stethoscope">
         <ion-icon name="create-outline"></ion-icon>
       </ion-button>
     </ion-item>
