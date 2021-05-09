@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { MainService } from "../shared/main.service";
-import { Router } from '@angular/router';
+import { Router, NavigationExtras } from '@angular/router';
 
 @Component({
   selector: 'app-tab1',
@@ -29,5 +29,16 @@ export class Tab1Page {
     console.log(uid);
     //Pass route param
     this.router.navigate(['new-appointment', uid]);
+  }
+
+  viewPrescription(uid)
+  {
+    console.log(uid);
+    let navigationExtras: NavigationExtras = {
+      state: {
+        patientID: uid
+      }
+    };
+    this.router.navigate(['view-prescription'], navigationExtras);
   }
 }

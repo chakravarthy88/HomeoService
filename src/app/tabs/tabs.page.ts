@@ -40,6 +40,10 @@ export class TabsPage {
     this.service.UnLockAllMyCases(this.service.getUserData().uid);
   }
 
+  Reload() {
+    window.location.reload();
+  }
+  
   Logout(){
     localStorage.removeItem("User");
     localStorage.removeItem("UserData");

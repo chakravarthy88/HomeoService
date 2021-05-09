@@ -19,6 +19,9 @@
     <ion-fab-button (click)="UnLockAllMyCases()" *ngIf="isL2 === true || isL1 === true">
       <ion-icon name="lock-open-outline"></ion-icon>
     </ion-fab-button>
+    <ion-fab-button (click)="Reload()">
+      <ion-icon name="refresh-outline"></ion-icon>
+    </ion-fab-button>
     <ion-fab-button (click)="Logout()">
       <ion-icon name="log-out-outline"></ion-icon>
     </ion-fab-button>

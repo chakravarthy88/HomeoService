@@ -50,6 +50,10 @@ const routes: Routes = [
   {
     path: 'view-appointment/:uid',
     loadChildren: () => import('./view-appointment/view-appointment.module').then( m => m.ViewAppointmentPageModule)
+  },
+  {
+    path: 'view-prescription',
+    loadChildren: () => import('./view-prescription/view-prescription.module').then( m => m.ViewPrescriptionPageModule)
   }
 
 ];

@@ -40,7 +40,7 @@ export class Tab2Page {
   async LockAppointment(uid) {
     const al = await this.alertCtrl.create({
       header: 'Are you sure?',
-      message: 'Complete the case without fail or unlock case. Are you sure?',
+      message: 'This item will be locked for you, please the case without fail or unlock case. Are you sure?',
       buttons: [
         { text: 'No', role: 'Cancel' },
         {

@@ -10,16 +10,27 @@
   <ion-list>
     <ion-card *ngFor="let patient of patients">
       <ion-card-header>
-        <ion-card-subtitle>{{patient.FirstName}}, {{patient.LastName}} - {{patient.Mobile}}</ion-card-subtitle>
-        <ion-card-title>{{patient.TaggedDoctor}}</ion-card-title>
+        <ion-card-subtitle>{{patient.FirstName}}, {{patient.LastName}}</ion-card-subtitle>
+        <ion-card-subtitle>{{patient.TaggedDoctor}}</ion-card-subtitle>
+        <ion-card-subtitle>{{patient.Mobile}}</ion-card-subtitle>
       </ion-card-header>    
-      <ion-card-content>
+      <!-- <ion-card-content>
         <ion-button (click)="NewAppointment(patient.uid)" color="primary" class="fa fa-stethoscope"><ion-icon name="alarm-outline"></ion-icon></ion-button>
-      </ion-card-content>
+      </ion-card-content> -->
+      <ion-row>
+        <ion-col size="6">
+            <ion-button color="primary" class="btnSize" Fill ="clear" (click)="NewAppointment(patient.uid)" > 
+                <ion-icon slot="start" name="calendar-number-outline"></ion-icon>
+                Appointment
+              </ion-button>
+        </ion-col>
+        <ion-col size="6">
+            <ion-button color="primary" class="btnSize" Fill ="clear" (click)="viewPrescription(patient.uid)" > 
+                <ion-icon slot="start" name="medkit-outline"></ion-icon>
+                Precription
+              </ion-button>
+        </ion-col>
+      </ion-row>
     </ion-card>
-    <!-- <ion-item *ngFor="let patient of patients">
-      <ion-label></ion-label>
-      <ion-button (click)="NewAppointment(patient.uid)" color="primary" expand="block" class="fa fa-stethoscope"><ion-icon name="alarm-outline"></ion-icon></ion-button>
-    </ion-item> -->
   </ion-list>
 </ion-content>

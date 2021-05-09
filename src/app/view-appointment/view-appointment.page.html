@@ -97,7 +97,7 @@
       </ion-item>
     </ion-list>
 
-    <ion-row *ngIf="isL1 === true">
+    <ion-row *ngIf="isL1 === true || isLocked === false">
       <ion-col>
         <ion-button  (click)="SendToDoctor()" color="primary" expand="block">Send To Doctor</ion-button>
         <ion-button  (click)="goToHome()" color="danger" expand="block">Cancel</ion-button>

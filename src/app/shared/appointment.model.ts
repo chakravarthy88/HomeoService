@@ -18,7 +18,7 @@ export interface Appointment {
     PulseRate: string;
     RegisteredBy: string;
     SleepSymptoms: string;
-    SymptomDate: string;
+    SymptomDate: Date;
     Symptoms: string;
     Temparature: string;
     

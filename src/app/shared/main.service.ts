@@ -114,6 +114,12 @@ export class MainService {
     this.router.navigate(['tabs']);
   }
 
+  LockAppointment(appt, uid){
+    this.afStore.collection("Appointments").doc(appt.uid).update({
+      LockedBy: uid
+    })
+  }
+
   UnLockAppointment(appt){
     this.afStore.collection("Appointments").doc(appt.uid).update({
       LockedBy: ""
@@ -216,7 +222,7 @@ export class MainService {
       PulseRate: data.PulseRate,
       RegisteredBy: data.RegisteredBy,
       SleepSymptoms: data.SleepSymptoms,
-      SymptomDate: data.SymptomDate,
+      SymptomDate: new Date(data.SymptomDate*1000),//data.SymptomDate,
       Symptoms: data.Symptoms,
       Temparature: data.Temparature,
       BodyPains: data.BodyPains,
@@ -233,5 +239,20 @@ export class MainService {
       TieredRestless: data.TieredRestless
     };
     return appointmentInfo;
+  }
+
+  getPatientAllAppointments(PatientID) {
+    console.log('loading-PatientAllAppointments', PatientID);
+    this.appoints = [];
+    this.afStore
+      .collection('Appointments', ref => ref.where("PatientID", "==", PatientID))
+      .get()
+      .subscribe(a => {
+        a.forEach(aa =>
+          this.appoints.push(this.buildAppointment(aa.data(), aa))
+        )
+      });
+    console.log(this.appoints);
+    return this.appoints;
   }
 }
