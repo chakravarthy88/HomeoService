@@ -1,6 +1,6 @@
 export interface Patient {
     uid: string;
-    MailID: string;
+    // MailID: string;
     FirstName: string;
     LastName: string;
     Mobile: boolean;
@@ -8,4 +8,5 @@ export interface Patient {
     Age: number;
     Gender: string;
     TaggedDoctor: string;
+    Address: string;
  }

@@ -69,7 +69,7 @@ export class NewAppointmentPage implements OnInit {
   }
 
   goToHome(){
-    this.router.navigate(['']);
+    this.router.navigate(['tabs']);
   }
 
 }

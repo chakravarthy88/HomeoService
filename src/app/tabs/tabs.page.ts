@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { Router, Navigation} from '@angular/router';
 import { NavController } from '@ionic/angular';
 import { LoginPage } from '../login/login.page';
+import { MainService } from "../shared/main.service";
 
 @Component({
   selector: 'app-tabs',
@@ -12,21 +13,25 @@ export class TabsPage {
 
   constructor(
     public navCtrl: NavController,
-    public router: Router
+    public router: Router,
+    public service: MainService
   ) {}
 
   ngOnInit() {
-    
-    //alert(JSON.parse(localStorage.getItem('user')))
     if(JSON.parse(localStorage.getItem('User')) == null)
     {
-       //alert("nouser");
        this.router.navigate(['login']);
     }
     
   }
+
   AddNewPatient(){
     this.router.navigate(['add-patient']);
+  }
+
+  UnLockAllMyCases()
+  {
+    this.service.UnLockAllMyCases(this.service.getUserData().uid);
   }
 
   Logout(){

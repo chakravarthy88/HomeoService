@@ -2,6 +2,8 @@ import { Component } from '@angular/core';
 import { MainService } from "../shared/main.service";
 import { Router } from '@angular/router';
 import { AuthenticationService } from "../shared/authentication.service";
+import { AlertController } from '@ionic/angular';
+
 
 @Component({
   selector: 'app-tab1',
@@ -14,31 +16,41 @@ export class Tab2Page {
   public isL1: boolean = false;
   public isL2: boolean = false;
   public showClosed: boolean = false;
-  
-  constructor(private service: MainService, private aservice: AuthenticationService, private router: Router) {}
 
-  ngOnInit(){
+  constructor(private service: MainService, private aservice: AuthenticationService, private router: Router, private alertCtrl: AlertController) { }
+
+  ngOnInit() {
+    //this.setPageStateByRole();
+  }
+
+  ionViewWillEnter() {
     this.setPageStateByRole();
   }
 
-  ngOnChanges() {
-    this.setPageStateByRole();
-  }
-
-  setPageStateByRole()
-  {
+  setPageStateByRole() {
     this.appointments = [];
     this.isL1 = this.aservice.getUserRole() == 2 ? true : false;
     this.isL2 = this.aservice.getUserRole() == 3 ? true : false;
-      if(this.isL1)
-        this.appointments = this.service.getL1Appointments();
-      else if(this.isL2)
-        this.appointments = this.service.getL2Appointments();
+    if (this.isL1)
+      this.appointments = this.service.getL1Appointments();
+    else if (this.isL2)
+      this.appointments = this.service.getL2Appointments();
   }
 
-  LockAppointment(uid)
-  {
-    //confirm if user wants to lock this 
-    this.router.navigate(['view-appointment', uid]);
+  async LockAppointment(uid) {
+    const al = await this.alertCtrl.create({
+      header: 'Are you sure?',
+      message: 'Complete the case without fail or unlock case. Are you sure?',
+      buttons: [
+        { text: 'No', role: 'Cancel' },
+        {
+          text: 'Yes',
+          handler: () => {
+            this.router.navigate(['view-appointment', uid])
+          }
+        }]
+    });
+
+    await al.present();
   }
 }

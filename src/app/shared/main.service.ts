@@ -105,6 +105,21 @@ export class MainService {
       .valueChanges();
   }
 
+  UnLockAllMyCases(uid) {
+    this.afStore.collection("Appointments", ref => ref.where("LockedBy", "==", uid))
+      .get()
+      .subscribe(a => {
+        a.forEach(aa => this.UnLockAppointment(aa))
+      });
+    this.router.navigate(['tabs']);
+  }
+
+  UnLockAppointment(appt){
+    this.afStore.collection("Appointments").doc(appt.uid).update({
+      LockedBy: ""
+    })
+  }
+
   sendToDoctor(appointment, uid) {
     this.afStore.collection("Appointments").doc(uid).update({
       Symptoms: appointment.Symptoms,
@@ -170,12 +185,13 @@ export class MainService {
   buildPatient(data, doc) {
     var patientInfo: Patient = {
       uid: doc.id,
-      MailID: data.MailID,
+      //MailID: data.MailID,
       FirstName: data.FirstName,
       LastName: data.LastName,
       Mobile: data.Mobile,
       AltMobile: data.AltMobile,
       Age: data.Age,
+      Address: data.Address,
       Gender: data.Gender,
       TaggedDoctor: data.TaggedDoctor
     };

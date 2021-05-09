@@ -44,6 +44,11 @@ Gender: string; -->
     </ion-item>
 
     <ion-item lines="full">
+      <ion-label position="floating">Address</ion-label>
+      <ion-input type="text" name="Addresss" required [(ngModel)]="patient.Address"></ion-input>
+    </ion-item>
+
+    <ion-item lines="full">
       <ion-label position="floating">Gender</ion-label>
       <ion-item>
         <ion-label>Male</ion-label>

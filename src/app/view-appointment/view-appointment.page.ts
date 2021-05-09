@@ -33,7 +33,7 @@ export class ViewAppointmentPage implements OnInit {
   }
 
   goToHome(){
-    this.router.navigate(['']);
+    this.router.navigate(['tabs']);
   }
 
   SendToDoctor()
@@ -47,5 +47,4 @@ export class ViewAppointmentPage implements OnInit {
     var drName = this.aservice.getUserData().displayName;
     this.service.tagDoctor(this.appointment.PatientID, drName);
   }
-
 }
