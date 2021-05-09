@@ -18,18 +18,21 @@ export class TabsPage {
   ngOnInit() {
     
     //alert(JSON.parse(localStorage.getItem('user')))
-    if(JSON.parse(localStorage.getItem('user')) == null)
+    if(JSON.parse(localStorage.getItem('User')) == null)
     {
        //alert("nouser");
-
-       //this.router.navigate(['login']);
+       this.router.navigate(['login']);
     }
     
   }
   AddNewPatient(){
-    //alert("hello");
-    this.router.navigateByUrl('/add-patient', { replaceUrl:true });
+    this.router.navigate(['add-patient']);
   }
 
+  Logout(){
+    localStorage.removeItem("User");
+    localStorage.removeItem("UserData");
+    this.router.navigate(['login']);
+  }
 
 }

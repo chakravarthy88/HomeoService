@@ -22,10 +22,10 @@ export class AuthenticationService {
       if (User) {
         this.userData = User;
         localStorage.setItem('User', JSON.stringify(this.userData));
-        // JSON.parse(localStorage.getItem('User'));
+        JSON.parse(localStorage.getItem('User'));
       } else {
         localStorage.setItem('User', null);
-        // JSON.parse(localStorage.getItem('User'));
+        JSON.parse(localStorage.getItem('User'));
       }
     })
   }
@@ -104,7 +104,7 @@ export class AuthenticationService {
   // Store User in localStorage 
   SetUserData(User) {
 
-    const userRef: AngularFirestoreDocument<any> = this.afStore.doc(`users/${User.uid}`);
+    const userRef: AngularFirestoreDocument<any> = this.afStore.doc(`Users/${User.uid}`);
     const userData = {
       uid: User.uid,
       email: User.email,
