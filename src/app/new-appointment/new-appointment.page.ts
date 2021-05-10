@@ -13,6 +13,7 @@ export class NewAppointmentPage implements OnInit {
   public appointment: any = {};
   public uid: any;
   public patientInfo: any = {};
+  public isPatient: boolean = false;
 
   constructor(private service: MainService, private router: Router, private aRouter: ActivatedRoute) {
     this.appointment.BodyPains = false;
@@ -31,6 +32,7 @@ export class NewAppointmentPage implements OnInit {
 
   ngOnInit() {
     this.uid = this.aRouter.snapshot.paramMap.get('uid');
+    this.isPatient = this.service.getUserRole() == null || this.service.getUserRole() == undefined || this.service.getUserRole() == 1;
   }
 
   getPatientById(uid)
@@ -71,5 +73,4 @@ export class NewAppointmentPage implements OnInit {
   goToHome(){
     this.router.navigate(['tabs']);
   }
-
 }

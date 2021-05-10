@@ -13,9 +13,11 @@ export class Tab1Page {
   
   constructor(private patientService: MainService, private router: Router) {}
 
-  ngOnInit(){
-    //this.patients = [];
-    //this.patients = this.patientService.getMyPatients();
+  ngOnChanges(){
+    if(this.patients.length ==0 )
+    {
+      this.patients = this.patientService.getMyPatients();
+    }
   }
 
   ionViewWillEnter()

@@ -41,6 +41,10 @@ export class MainService {
     return this.getUserData().userDataInDB.uid;
   }
 
+  getUserRole() {
+    return this.getUserData().userDataInDB.role;
+  }
+
   SavePatient(patient) {
     return this.afStore.collection('Patients').add(patient);
   }

@@ -86,21 +86,23 @@ export class AuthenticationService {
     //return new firebase.auth.GoogleAuthProvider();
 
     var provider = new firebase.auth.GoogleAuthProvider();
-    provider.addScope('https://www.googleapis.com/auth/contacts.readonly');
+    //provider.addScope('https://www.googleapis.com/auth/contacts.readonly');
+    provider.addScope('https://www.googleapis.com/auth/plus.login');
     this.AuthLogin(provider);
   }
 
   // Auth providers
   AuthLogin(provider) {
-    return this.ngFireAuth.signInWithPopup(provider)
-    .then((result) => {
-       this.ngZone.run(() => {
-          this.SetUserData(result.user);
-          this.router.navigateByUrl('/tabs');
-        })
-    }).catch((error) => {
-      window.alert(error)
-    })
+    this.ngFireAuth.signInWithRedirect(provider);
+    // return this.ngFireAuth.signInWithPopup(provider)
+    // .then((result) => {
+    //    this.ngZone.run(() => {
+    //       this.SetUserData(result.user);
+    //       this.router.navigateByUrl('/tabs');
+    //     })
+    // }).catch((error) => {
+    //   window.alert(error)
+    // })
   }
 
   // Store User in localStorage 
@@ -133,6 +135,7 @@ export class AuthenticationService {
         }
         localStorage.setItem('User', this.userData)
         localStorage.setItem('UserData', JSON.stringify(this.userData));
+        this.router.navigateByUrl('/tabs');
       });
   }
 

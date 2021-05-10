@@ -22,7 +22,7 @@ export class TabsPage {
   ) {}
 
 
-  ionViewWillEnter() {
+  ngOnInit() {
     this.isL1 = this.aservice.getUserRole() == 2 ? true : false;
     this.isL2 = this.aservice.getUserRole() == 3 ? true : false;
   }

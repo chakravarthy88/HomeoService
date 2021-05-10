@@ -1,6 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, NgZone } from '@angular/core';
 import { Router } from "@angular/router";
 import { AuthenticationService } from "../shared/authentication.service";
+import firebase from 'firebase/app';
+import { AngularFireAuth } from "@angular/fire/auth";
+import { AngularFirestore, AngularFirestoreDocument } from '@angular/fire/firestore';
 
 @Component({
   selector: 'app-login',
@@ -11,10 +14,24 @@ export class LoginPage implements OnInit {
 
   constructor(
     public authService: AuthenticationService,
-    public router: Router
-  ) { }
+    public router: Router,
+    public ngZone: NgZone, 
+    public afStore: AngularFirestore,
+    public ngFireAuth: AngularFireAuth,
+) { }
 
   ngOnInit() {
+    this.ngFireAuth.getRedirectResult()
+    .then((result) => {
+      if(result.credential && result.user)
+      {
+        this.ngZone.run(() => {
+          this.authService.SetUserData(result.user);
+        })
+      }
+    }).catch((error) => {
+      window.alert(error)
+    })
   }
 
   logIn(email, password) {
