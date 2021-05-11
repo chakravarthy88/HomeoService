@@ -1,4 +1,5 @@
 import { DebugElement, Injectable, NgZone } from '@angular/core';
+import { toastController } from '@ionic/core';
 import { firebase } from 'firebase/firebase-auth'
 import { AngularFireDatabase, AngularFireObject } from '@angular/fire/database';
 import { Router } from "@angular/router";
@@ -26,7 +27,7 @@ export class MainService {
     public ngZone: NgZone,
     private db: AngularFireDatabase
   ) {
-    // if(uData == null || uData.userDataInDB == undefined)
+    // if(uData == null || uData.userInDB == undefined)
     // {
     //   console.log('wrong-login')
     //   this.router.navigate(['login']);
@@ -38,11 +39,11 @@ export class MainService {
   }
 
   getUserUID() {
-    return this.getUserData().userDataInDB.uid;
+    return this.getUserData().userInDB.uid;
   }
 
   getUserRole() {
-    return this.getUserData().userDataInDB.role;
+    return this.getUserData().userInDB.role;
   }
 
   SavePatient(patient) {
@@ -267,5 +268,16 @@ export class MainService {
       });
     console.log(this.appoints);
     return this.appoints;
+  }
+
+  async showToastMessage(message) {
+    async function handleButtonClick() {
+      const toast = await toastController.create({
+        color: 'dark',
+        duration: 2000,
+        message: message
+      });
+      await toast.present();
+    }
   }
 }

@@ -48,8 +48,16 @@ Gender: string; -->
       <ion-input type="text" name="Addresss" required [(ngModel)]="patient.Address"></ion-input>
     </ion-item>
 
+    
+
     <ion-item lines="full">
-      <ion-label position="floating">Gender</ion-label>
+      <ion-label>Gender</ion-label>
+      <ion-select name="Gender" [(ngModel)]="patient.Gender" value="Male">
+        <ion-select-option  value="Male">Male</ion-select-option>
+        <ion-select-option  value="Female">Female</ion-select-option>
+      </ion-select>
+
+      <!-- <ion-label position="floating">Gender</ion-label>
       <ion-item>
         <ion-label>Male</ion-label>
         <ion-radio slot="gender" name="Gender" value="Male" [(ngModel)]="patient.Gender"></ion-radio>
@@ -57,7 +65,7 @@ Gender: string; -->
       <ion-item>
         <ion-label>Female</ion-label>
         <ion-radio slot="gender" name="Gender" value="Female" [(ngModel)]="patient.Gender"></ion-radio>
-      </ion-item>
+      </ion-item> -->
     </ion-item>
 
     <ion-row>

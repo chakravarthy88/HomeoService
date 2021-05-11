@@ -23,9 +23,21 @@ export class TabsPage {
 
 
   ngOnInit() {
+    var uData = this.aservice.getUserData();    
+    if(uData == null || uData.userInDB == undefined)
+    {
+      console.log('wrong-login')
+      this.router.navigate(['login']);
+    }
+    else
+    {
+      this.isL1 = this.aservice.getUserRole() == 2 ? true : false;
+      this.isL2 = this.aservice.getUserRole() == 3 ? true : false;
+    }
+
     this.isL1 = this.aservice.getUserRole() == 2 ? true : false;
     this.isL2 = this.aservice.getUserRole() == 3 ? true : false;
-  }
+}
 
   ionViewDidEnter() {
     // var uData = this.aservice.getUserData();    

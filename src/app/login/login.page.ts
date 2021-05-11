@@ -18,7 +18,10 @@ export class LoginPage implements OnInit {
     public ngZone: NgZone, 
     public afStore: AngularFirestore,
     public ngFireAuth: AngularFireAuth,
-) { }
+) { 
+  localStorage.removeItem("User");
+  localStorage.removeItem("UserData");
+}
 
   ngOnInit() {
     this.ngFireAuth.getRedirectResult()
@@ -37,13 +40,7 @@ export class LoginPage implements OnInit {
   logIn(email, password) {
     this.authService.SignIn(email.value, password.value)
       .then((res) => {
-        if(this.authService.isEmailVerified) {
-          this.router.navigate(['']);          
-        } else {
-          
-          window.alert('Email is not verified')
-          return false;
-        }
+        this.authService.SetUserData(res.user);
       }).catch((error) => {
         window.alert(error.message)
       })
