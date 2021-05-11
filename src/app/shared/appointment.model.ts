@@ -1,3 +1,5 @@
+import { Patient } from "./patient.model";
+
 export interface Appointment {
     uid: string;
     PatientID: string;
@@ -35,4 +37,6 @@ export interface Appointment {
     Nausea: boolean;
     Thirst: boolean;
     TieredRestless: boolean;
+
+    PatientInfo: Patient;
 }

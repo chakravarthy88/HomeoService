@@ -9,7 +9,17 @@
 
 <ion-content>
   <form>
-    <input type="hidden" name="uid" [(ngModel)]="appointment.uid"/>
+    <input type="hidden" name="uid" [(ngModel)]="appointment.uid" />
+    <ion-card>
+      <ion-card-header>
+        <ion-label>Patient Name: {{appointment.PatientName}}</ion-label><br/>
+        <ion-label>Mobile #: {{appointment.Mobile}}</ion-label>
+      </ion-card-header>
+      <!-- <ion-card-content>
+        <ion-icon item-left name="user-icon"></ion-icon>
+        Mobile: {{patientInfo.Mobile}}
+      </ion-card-content> -->
+    </ion-card>
     <ion-item lines="full">
       <ion-label position="floating">Symptoms</ion-label>
       <ion-textarea type="text" name="Symptoms" required [(ngModel)]="appointment.Symptoms"></ion-textarea>
@@ -24,7 +34,8 @@
     </ion-item>
     <ion-item lines="full">
       <ion-label position="floating">Mucus Color & Texture</ion-label>
-      <ion-input type="text" name="MucusColorTexture" required [(ngModel)]="appointment.MucusColorTexture"></ion-input>
+      <ion-input type="text" name="MucusColorTexture" required [(ngModel)]="appointment.MucusColorTexture">
+      </ion-input>
     </ion-item>
     <ion-item lines="full">
       <ion-label position="floating">OXI Meter Reading</ion-label>
@@ -44,7 +55,8 @@
     </ion-item>
     <ion-item lines="full">
       <ion-label position="floating">Doctor Prescription</ion-label>
-      <ion-textarea type="text" name="DoctorPrescription" required [(ngModel)]="appointment.DoctorPrescription"></ion-textarea>
+      <ion-textarea type="text" name="DoctorPrescription" required [(ngModel)]="appointment.DoctorPrescription">
+      </ion-textarea>
     </ion-item>
     <ion-list>
       <ion-item>
@@ -99,14 +111,15 @@
 
     <ion-row *ngIf="isL1 === true">
       <ion-col>
-        <ion-button *ngIf="appointment.IsAcquirable" (click)="SendToDoctor()" color="primary" expand="block">Send To Doctor</ion-button>
-        <ion-button  (click)="goToHome()" color="danger" expand="block">Cancel</ion-button>
+        <ion-button *ngIf="appointment.IsAcquirable" (click)="SendToDoctor()" color="primary" expand="block">Send To
+          Doctor</ion-button>
+        <ion-button (click)="goToHome()" color="danger" expand="block">Cancel</ion-button>
       </ion-col>
     </ion-row>
     <ion-row *ngIf="isL2 === true">
       <ion-col>
-        <ion-button  (click)="CompleteDoctorReview()" color="primary" expand="block">Complete Review</ion-button>
-        <ion-button  (click)="goToHome()" color="danger" expand="block">Cancel</ion-button>
+        <ion-button (click)="CompleteDoctorReview()" color="primary" expand="block">Complete Review</ion-button>
+        <ion-button (click)="goToHome()" color="danger" expand="block">Cancel</ion-button>
       </ion-col>
     </ion-row>
 

@@ -9,6 +9,15 @@
 
 <ion-content>
   <form>
+    <!-- <ion-card>
+      <ion-card-header>
+        <ion-label>{{appointment.PatientName}}</ion-label>
+      </ion-card-header>
+      <ion-card-content>
+        <ion-icon item-left name="user-icon"></ion-icon>
+        Mobile: {{appointment.PatientInfo.Mobile}}
+      </ion-card-content>
+    </ion-card> -->
     <ion-item lines="full">
       <ion-label position="floating">Symptoms</ion-label>
       <ion-textarea type="text" name="Symptoms" required [(ngModel)]="appointment.Symptoms"></ion-textarea>

@@ -1,5 +1,5 @@
 import { DebugElement, Injectable, NgZone } from '@angular/core';
-import { toastController } from '@ionic/core';
+import { loadingController, toastController } from '@ionic/core';
 import { firebase } from 'firebase/firebase-auth'
 import { AngularFireDatabase, AngularFireObject } from '@angular/fire/database';
 import { Router } from "@angular/router";
@@ -66,7 +66,7 @@ export class MainService {
       .get()
       .subscribe(a => {
         a.forEach(aa =>
-          this.patients.push(this.buildPatient(aa.data(), aa))
+          this.patients.push(this.buildPatientWithDoc(aa.data(), aa))
         )
       });
     console.log(this.patients);
@@ -81,7 +81,7 @@ export class MainService {
       .get()
       .subscribe(a => {
         a.forEach(aa =>
-          this.appoints.push(this.buildAppointment(aa.data(), aa))
+          this.appoints.push(this.buildAppointmentWithDoc(aa.data(), aa))
         )
       });
     console.log(this.appoints);
@@ -97,7 +97,7 @@ export class MainService {
       .get()
       .subscribe(a => {
         a.forEach(aa =>
-          this.appoints.push(this.buildAppointment(aa.data(), aa))
+          this.appoints.push(this.buildAppointmentWithDoc(aa.data(), aa))
         )
       });
     console.log(this.appoints);
@@ -202,11 +202,13 @@ export class MainService {
     this.showToastMessage("Review completed");
     this.router.navigate(['']);
   }
+  buildPatientWithDoc(data, doc) {
+    return this.buildPatient(data, doc.uid);
+  }
 
-  buildPatient(data, doc) {
+  buildPatient(data, uid) {
     var patientInfo: Patient = {
-      uid: doc.id,
-      //MailID: data.MailID,
+      uid: uid,
       FirstName: data.FirstName,
       LastName: data.LastName,
       Mobile: data.Mobile,
@@ -219,9 +221,12 @@ export class MainService {
     return patientInfo;
   }
 
-  buildAppointment(data, doc) {
+  buildAppointmentWithDoc(data, doc) {
+    return this.buildAppointment(data, doc.id);
+  }
+  buildAppointment(data, uid) {
     var appointmentInfo: Appointment = {
-      uid: doc.id,
+      uid: uid,
       AppointmentClosed: data.AppointmentClosed,
       ContactNumber: data.ContactNumber,
       DoctorPrescription: data.DoctorPrescription,
@@ -251,7 +256,8 @@ export class MainService {
       FeverWithChills: data.FeverWithChills,
       Nausea: data.Nausea,
       Thirst: data.Thirst,
-      TieredRestless: data.TieredRestless
+      TieredRestless: data.TieredRestless,
+      PatientInfo: this.buildPatient(data.PatientInfo, uid)
     };
     return appointmentInfo;
   }
@@ -264,7 +270,7 @@ export class MainService {
       .get()
       .subscribe(a => {
         a.forEach(aa =>
-          this.appoints.push(this.buildAppointment(aa.data(), aa))
+          this.appoints.push(this.buildAppointmentWithDoc(aa.data(), aa))
         )
       });
     console.log(this.appoints);
@@ -278,5 +284,14 @@ export class MainService {
       message: message
     });
     await toast.present();
+  }
+
+  async showLoadingSpinner() {
+    const loading = await loadingController.create({
+      message: 'Please wait...',
+      duration: 2000
+    });
+
+    await loading.present();
   }
 }

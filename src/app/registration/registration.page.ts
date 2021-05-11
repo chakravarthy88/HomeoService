@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from "@angular/router";
 import { AuthenticationService } from "../shared/authentication.service";
+import { MainService } from '../shared/main.service';
 import { User } from '../shared/User.model';
 
 @Component({
@@ -12,7 +13,8 @@ export class RegistrationPage implements OnInit {
 
   constructor(
     public authService: AuthenticationService,
-    public router: Router
+    public router: Router,
+    public service: MainService
   ) { }
 
   ngOnInit() {
@@ -23,6 +25,7 @@ export class RegistrationPage implements OnInit {
   }
 
   signUp(email, password, fullname) {
+    this.service.showLoadingSpinner();
     this.authService.RegisterUser(email.value, password.value)
       .then((res) => {
         this.CreateUser(res.user, email.value, fullname.value);

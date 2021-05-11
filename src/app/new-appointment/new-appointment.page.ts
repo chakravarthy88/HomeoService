@@ -43,7 +43,7 @@ export class NewAppointmentPage implements OnInit {
   SaveAppointment(){
 
     console.log(this.appointment);
-
+    this.service.showLoadingSpinner();
     var userData = JSON.parse(localStorage.getItem('UserData'));
     this.getPatientById(this.aRouter.snapshot.paramMap.get('uid')).subscribe(res =>
       {

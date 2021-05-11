@@ -42,7 +42,7 @@ export class AuthenticationService {
     var userData = JSON.parse(localStorage.getItem('UserData'))
     if(userData != undefined && userData.userInDB != undefined)
     {
-      var userInDB = userData.userInDB[0];
+      var userInDB = userData.userInDB;
       return userInDB.role;
     }
   }
@@ -155,7 +155,7 @@ export class AuthenticationService {
           displayName: User.displayName,
           photoURL: User.photoURL,
           emailVerified: User.emailVerified,
-          userInDB: a
+          userInDB: a[0]
         }
 
         localStorage.setItem('User', JSON.stringify(this.userData));

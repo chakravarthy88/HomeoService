@@ -40,6 +40,7 @@ export class LoginPage implements OnInit {
   }
 
   logIn(email, password) {
+    this.mainService.showLoadingSpinner();
     this.authService.SignIn(email.value, password.value)
       .then((res) => {
         this.authService.SetUserData(res.user);

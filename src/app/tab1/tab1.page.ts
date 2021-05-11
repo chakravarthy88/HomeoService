@@ -22,6 +22,7 @@ export class Tab1Page {
 
   ionViewWillEnter()
   {
+    this.patientService.showLoadingSpinner();
     this.patients = [];
     this.patients = this.patientService.getMyPatients();
   }

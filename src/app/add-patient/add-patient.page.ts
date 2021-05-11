@@ -25,7 +25,8 @@ export class AddPatientPage implements OnInit {
   SavePatient(){
 
     console.log(this.patient);
-
+    this.mainService.showLoadingSpinner();
+    
     var userData = JSON.parse(localStorage.getItem('UserData'));
     //this.patient.MailID = userData.email;
     this.patient.RegisteredBy = userData.uid;

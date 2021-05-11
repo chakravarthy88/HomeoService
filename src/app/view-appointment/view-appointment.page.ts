@@ -25,18 +25,22 @@ export class ViewAppointmentPage implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.setRoles();
     this.apptUID = this.aRouter.snapshot.paramMap.get('uid');
+    this.setRoles();
     this.service.getAppointmentId(this.apptUID).subscribe(res => {
-      this.appointment = res;
-      this.appointment.IsAcquirable = this.appointment.LockedBy == '' || this.appointment.LockedBy == this.service.getUserUID();
+      this.appointment = this.service.buildAppointment(res, this.apptUID);
+      this.patientInfo = this.appointment.PatientInfo;
+      this.appointment.IsAcquirable = this.appointment.LockedBy === '' || this.appointment.LockedBy === this.service.getUserUID();
       if (!this.appointment.IsAcquirable) {
         this.AppointmentNotAvailable();
       }
-      else{
+      else {
         var userData = JSON.parse(localStorage.getItem('UserData'))
-        var userUID = userData.userDataInDB.uid;
-        this.service.LockAppointment(this.apptUID, userUID);
+        var userUID = userData.userInDB.uid;
+        if(this.appointment.LockedBy != this.service.getUserUID())
+        {
+          this.service.LockAppointment(this.apptUID, userUID);
+        }
       }
     });
   }
@@ -61,11 +65,13 @@ export class ViewAppointmentPage implements OnInit {
   }
 
   SendToDoctor() {
+    this.service.showLoadingSpinner();
     this.service.sendToDoctor(this.appointment, this.aRouter.snapshot.paramMap.get('uid'));
     this.service.showToastMessage("Appointment Sent to Doctor Successfully");
   }
 
   CompleteDoctorReview() {
+    this.service.showLoadingSpinner();
     this.service.completeReview(this.appointment, this.aRouter.snapshot.paramMap.get('uid'));
     var drName = this.aservice.getUserData().displayName;
     this.service.tagDoctor(this.appointment.PatientID, drName);
