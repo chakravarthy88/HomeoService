@@ -5,6 +5,7 @@ import { Router } from "@angular/router";
 import { AngularFireAuth } from "@angular/fire/auth";
 import { AngularFirestore, AngularFirestoreDocument } from '@angular/fire/firestore';
 import { JsonPipe } from '@angular/common';
+import { MainService } from "../shared/main.service";
 
 @Injectable({
   providedIn: 'root'
@@ -17,7 +18,8 @@ export class AuthenticationService {
     public afStore: AngularFirestore,
     public ngFireAuth: AngularFireAuth,
     public router: Router,  
-    public ngZone: NgZone 
+    public ngZone: NgZone,
+    public mainService: MainService 
   ) {
     
     this.ngFireAuth.authState.subscribe(User => {
@@ -70,9 +72,9 @@ export class AuthenticationService {
   PasswordRecover(passwordResetEmail) {
     return this.ngFireAuth.sendPasswordResetEmail(passwordResetEmail)
     .then(() => {
-      window.alert('Password reset email has been sent, please check your inbox.');
+      this.mainService.showToastMessage('Password reset email has been sent, please check your inbox.');
     }).catch((error) => {
-      window.alert(error)
+      this.mainService.showToastMessage(error)
     })
   }
 
@@ -160,9 +162,10 @@ export class AuthenticationService {
         localStorage.setItem('UserData', JSON.stringify(this.userData));
 
         if(this.isEmailVerified()) {
+          this.mainService.showToastMessage("Login Successsful, you will be redirected now");
           this.router.navigateByUrl('/tabs');  
         } else {
-          alert('Invalid Credentials, please try again');
+          this.mainService.showToastMessage('Invalid Credentials, please try again');
           return false;
         }
       });

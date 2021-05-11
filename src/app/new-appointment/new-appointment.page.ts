@@ -65,7 +65,8 @@ export class NewAppointmentPage implements OnInit {
         this.appointment.RegisteredBy = userData.uid;
 
         this.service.SaveAppointment(this.appointment);
-        this.router.navigate(['']);
+        this.service.showToastMessage("Appointment Saved and sent for review !!");
+        this.router.navigate(['tabs']);
       }
     );    
   }

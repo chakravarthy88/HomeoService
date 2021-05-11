@@ -8,7 +8,6 @@ import { AngularFirestore, AngularFirestoreDocument } from '@angular/fire/firest
 import { Patient } from './patient.model';
 import { Appointment } from './appointment.model';
 
-
 @Injectable({
   providedIn: 'root'
 })
@@ -125,16 +124,17 @@ export class MainService {
       .subscribe(a => {
         a.forEach(aa => this.UnLockAppointment(aa))
       });
+    this.showToastMessage("Unlock all patients successfull");
     this.router.navigate(['tabs']);
   }
 
-  LockAppointment(apptUID, userID){
+  LockAppointment(apptUID, userID) {
     this.afStore.collection("Appointments").doc(apptUID).update({
       LockedBy: userID
     })
   }
 
-  UnLockAppointment(appt){
+  UnLockAppointment(appt) {
     this.afStore.collection("Appointments").doc(appt.uid).update({
       LockedBy: ""
     })
@@ -146,7 +146,7 @@ export class MainService {
       Temparature: appointment.Temparature,
       FeverPeaksIn: appointment.FeverPeaksIn,
       ReviewStatus: "L1ReviewCompleted",
-      LockedBy:  "",
+      LockedBy: "",
       MucusColorTexture: appointment.MucusColorTexture,
       OXIMeterReading: appointment.OXIMeterReading,
       PeculiarSymptoms: appointment.PeculiarSymptoms,
@@ -168,7 +168,7 @@ export class MainService {
     this.router.navigate(['']);
   }
 
-  tagDoctor(uid, name){
+  tagDoctor(uid, name) {
     this.afStore.collection("Patients").doc(uid).update({
       TaggedDoctor: name
     });
@@ -180,7 +180,7 @@ export class MainService {
       Temparature: appointment.Temparature,
       FeverPeaksIn: appointment.FeverPeaksIn,
       ReviewStatus: "L2ReviewCompleted",
-      LockedBy:  "",
+      LockedBy: "",
       MucusColorTexture: appointment.MucusColorTexture,
       OXIMeterReading: appointment.OXIMeterReading,
       PeculiarSymptoms: appointment.PeculiarSymptoms,
@@ -199,6 +199,7 @@ export class MainService {
       Thirst: appointment.Thirst,
       TieredRestless: appointment.TieredRestless
     });
+    this.showToastMessage("Review completed");
     this.router.navigate(['']);
   }
 
@@ -236,7 +237,7 @@ export class MainService {
       PulseRate: data.PulseRate,
       RegisteredBy: data.RegisteredBy,
       SleepSymptoms: data.SleepSymptoms,
-      SymptomDate: new Date(data.SymptomDate*1000),//data.SymptomDate,
+      SymptomDate: new Date(data.SymptomDate * 1000),//data.SymptomDate,
       Symptoms: data.Symptoms,
       Temparature: data.Temparature,
       BodyPains: data.BodyPains,
@@ -271,13 +272,11 @@ export class MainService {
   }
 
   async showToastMessage(message) {
-    async function handleButtonClick() {
-      const toast = await toastController.create({
-        color: 'dark',
-        duration: 2000,
-        message: message
-      });
-      await toast.present();
-    }
+    const toast = await toastController.create({
+      color: 'dark',
+      duration: 2000,
+      message: message
+    });
+    await toast.present();
   }
 }

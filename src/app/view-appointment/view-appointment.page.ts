@@ -62,11 +62,13 @@ export class ViewAppointmentPage implements OnInit {
 
   SendToDoctor() {
     this.service.sendToDoctor(this.appointment, this.aRouter.snapshot.paramMap.get('uid'));
+    this.service.showToastMessage("Appointment Sent to Doctor Successfully");
   }
 
   CompleteDoctorReview() {
     this.service.completeReview(this.appointment, this.aRouter.snapshot.paramMap.get('uid'));
     var drName = this.aservice.getUserData().displayName;
     this.service.tagDoctor(this.appointment.PatientID, drName);
+    this.service.showToastMessage("Review Completed Successfully");
   }
 }

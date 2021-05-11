@@ -1,6 +1,7 @@
 import { Component, OnInit, NgZone } from '@angular/core';
 import { Router } from "@angular/router";
 import { AuthenticationService } from "../shared/authentication.service";
+import { MainService } from "../shared/main.service";
 import firebase from 'firebase/app';
 import { AngularFireAuth } from "@angular/fire/auth";
 import { AngularFirestore, AngularFirestoreDocument } from '@angular/fire/firestore';
@@ -18,6 +19,7 @@ export class LoginPage implements OnInit {
     public ngZone: NgZone, 
     public afStore: AngularFirestore,
     public ngFireAuth: AngularFireAuth,
+    public mainService: MainService
 ) { 
   localStorage.removeItem("User");
   localStorage.removeItem("UserData");
@@ -42,7 +44,7 @@ export class LoginPage implements OnInit {
       .then((res) => {
         this.authService.SetUserData(res.user);
       }).catch((error) => {
-        window.alert(error.message)
+        this.mainService.showToastMessage(error.message)
       })
   }
 

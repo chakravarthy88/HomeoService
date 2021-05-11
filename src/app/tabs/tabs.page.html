@@ -8,21 +8,25 @@
       <ion-icon name="ellipse"></ion-icon>
       <ion-label>My Queue</ion-label>
     </ion-tab-button>
+    <ion-tab-button (click)="Reload()">
+      <ion-icon name="refresh-outline"></ion-icon>
+      <ion-label>Reload</ion-label>
+    </ion-tab-button>
   </ion-tab-bar>
 </ion-tabs>
 <ion-fab vertical="bottom" horizontal="end">
   <ion-fab-button><ion-icon name="add-outline"></ion-icon></ion-fab-button>
   <ion-fab-list side="top">
-    <ion-fab-button (click)="AddNewPatient()">
-      <ion-icon name="person-add-outline"></ion-icon>
+    <ion-fab-button (click)="AddNewPatient()" title="Add Patient">
+      <ion-icon  name="person-add-outline">Add Patient</ion-icon>
     </ion-fab-button>
-    <ion-fab-button (click)="UnLockAllMyCases()" *ngIf="isL2 === true || isL1 === true">
+    <ion-fab-button (click)="UnLockAllMyCases()" *ngIf="isL2 === true || isL1 === true"  title="Unlock Appointments">
       <ion-icon name="lock-open-outline"></ion-icon>
     </ion-fab-button>
-    <ion-fab-button (click)="Reload()">
+    <ion-fab-button (click)="Reload()" title="Reload Page">
       <ion-icon name="refresh-outline"></ion-icon>
     </ion-fab-button>
-    <ion-fab-button (click)="Logout()">
+    <ion-fab-button (click)="Logout()" title="Logout">
       <ion-icon name="log-out-outline"></ion-icon>
     </ion-fab-button>
   </ion-fab-list>

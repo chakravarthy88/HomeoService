@@ -14,7 +14,7 @@ export class AddPatientPage implements OnInit {
   public patient: any = {};
   
   constructor(
-    private svc: MainService,
+    private mainService: MainService,
     private router: Router
   ) { }
 
@@ -31,7 +31,8 @@ export class AddPatientPage implements OnInit {
     this.patient.RegisteredBy = userData.uid;
     this.patient.TaggedDoctor = "Not Tagged to Doctor";
 
-    this.svc.SavePatient(this.patient);
+    this.mainService.SavePatient(this.patient);
+    this.mainService.showToastMessage("Patient Added Successfully");
     this.router.navigate(['tabs']);
   }
 
