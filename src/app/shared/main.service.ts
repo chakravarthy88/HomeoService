@@ -69,7 +69,7 @@ export class MainService {
           this.patients.push(this.buildPatientWithDoc(aa.data(), aa))
         )
       });
-    console.log(this.patients);
+    //console.log(this.patients);
     return this.patients;
   }
 
@@ -84,7 +84,7 @@ export class MainService {
           this.appoints.push(this.buildAppointmentWithDoc(aa.data(), aa))
         )
       });
-    console.log(this.appoints);
+    //console.log(this.appoints);
     return this.appoints;
   }
 
@@ -202,8 +202,9 @@ export class MainService {
     this.showToastMessage("Review completed");
     this.router.navigate(['']);
   }
+  
   buildPatientWithDoc(data, doc) {
-    return this.buildPatient(data, doc.uid);
+    return this.buildPatient(data, doc.id);
   }
 
   buildPatient(data, uid) {

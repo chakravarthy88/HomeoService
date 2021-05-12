@@ -39,14 +39,24 @@ export class LoginPage implements OnInit {
     })
   }
 
-  logIn(email, password) {
-    this.mainService.showLoadingSpinner();
-    this.authService.SignIn(email.value, password.value)
-      .then((res) => {
-        this.authService.SetUserData(res.user);
-      }).catch((error) => {
-        this.mainService.showToastMessage(error.message)
-      })
+  logIn(email, password, IAgree) {
+    if(email.value == "" || password.value == ""){
+      this.mainService.showToastMessage("Mail ID & Password Required");
+    }
+    else if(!IAgree.checked){
+      this.mainService.showToastMessage("Please select click I Agree to proceed further");
+      return;
+    }
+    else
+    {
+      this.mainService.showLoadingSpinner();
+      this.authService.SignIn(email.value, password.value)
+        .then((res) => {
+          this.authService.SetUserData(res.user);
+        }).catch((error) => {
+          this.mainService.showToastMessage(error.message)
+        })
+    }
   }
 
   register(){

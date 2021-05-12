@@ -8,11 +8,11 @@
 </ion-header>
 
 <ion-content>
-  <form>    
+  <form>
     <ion-item lines="full">
       <ion-label position="floating">Email</ion-label>
       <ion-input type="text" #email required></ion-input>
-    </ion-item> 
+    </ion-item>
 
     <ion-item lines="full">
       <ion-label position="floating">Password</ion-label>
@@ -20,8 +20,8 @@
     </ion-item>
 
     <ion-row>
-      <ion-col> 
-      <ion-button type="submit" (click)="logIn(email, password)" expand="block">Login</ion-button>
+      <ion-col>
+        <ion-button type="submit" (click)="logIn(email, password, IAgree)" expand="block">Login</ion-button>
       </ion-col>
     </ion-row>
     <!-- <ion-row>
@@ -37,22 +37,33 @@
     </ion-row> -->
     <ion-row>
       <ion-col>
-        <ion-button 
-         type="submit" 
-         color="danger"
-         (click)="register()" 
-         expand="block">
-           Register
-        </ion-button>
+        <ion-button type="submit" color="danger" (click)="register()" expand="block">
+          Register
+        </ion-button>        
       </ion-col>
     </ion-row>
     <ion-row>
       <ion-col>
-        <h3>
-          Disclaimer: This is only an alterntaive support service.  Patients are advised to visit nearst Hospital for any emergencies.  
-          Patients with co-morbidities like hypertension, diabetes etc., are advised to continue their respective medications adn continue taking consultat from their fmily physicians.  
-          Our panel doctors will noe be help responsible for any casuality as we are not in physical contact with the patient and cannot assess continuously       
-        </h3>
+        <ion-item>
+          <ion-list>
+            <ion-item>
+              <ion-label>Agree Terms of Usage & Understand the below guideline</ion-label>
+              <ion-checkbox name="IAgree" #IAgree></ion-checkbox>
+            </ion-item>
+          </ion-list>
+        </ion-item>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col>
+        <h4>
+          Disclaimer: This is only an alterntaive support service. Patients are advised to visit nearst Hospital for any
+          emergencies.
+          Patients with co-morbidities like hypertension, diabetes etc., are advised to continue their respective
+          medications adn continue taking consultat from their fmily physicians.
+          Our panel doctors will noe be help responsible for any casuality as we are not in physical contact with the
+          patient and cannot assess continuously
+        </h4>
       </ion-col>
     </ion-row>
   </form>
