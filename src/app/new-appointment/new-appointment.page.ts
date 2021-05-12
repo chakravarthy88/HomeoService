@@ -46,7 +46,6 @@ export class NewAppointmentPage implements OnInit {
   }
 
   SaveAppointment(){
-    debugger;
     console.log(this.appointment);
     this.service.showLoadingSpinner();
     var userData = JSON.parse(localStorage.getItem('UserData'));
