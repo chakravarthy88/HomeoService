@@ -50,6 +50,7 @@ export class MainService {
   }
 
   SaveAppointment(appoint) {
+    debugger;
     return this.afStore.collection('Appointments').add(appoint);
   }
 

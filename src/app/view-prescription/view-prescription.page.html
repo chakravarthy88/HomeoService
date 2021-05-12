@@ -1,22 +1,28 @@
 <ion-header>
   <ion-toolbar>
-      <ion-buttons slot="start">
-          <ion-back-button></ion-back-button>
-        </ion-buttons>
+    <ion-buttons slot="start">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
     <ion-title>Prescriptions</ion-title>
   </ion-toolbar>
-</ion-header> 
+</ion-header>
 
 <ion-content>
-    <ion-card *ngFor="let prescription of prescriptions">
-      <ion-card-header>
-          <ion-label>{{prescription.SymptomDate | date:'d, MMM h:mm a'}}</ion-label>
-      </ion-card-header>
-        <ion-card-content>
-          <ion-icon item-left name="bag-add-outline"></ion-icon>Prescription: {{prescription.DoctorPrescription}}
-        </ion-card-content>
-        <ion-card-content>
-          <ion-icon item-left name="bag-add-outline"></ion-icon>Current State: {{prescription.ReviewStatus}}
-        </ion-card-content>
-      </ion-card>
+  <ion-card *ngFor="let prescription of prescriptions">
+    <ion-card-header>
+      <ion-label>{{prescription.SymptomDate | date:'d, MMM h:mm a'}}</ion-label>
+    </ion-card-header>
+    <ion-card-content>
+      <span class="blockSpan">
+
+        <ion-icon item-left name="bag-add-outline"></ion-icon> Prescription: {{prescription.DoctorPrescription}}
+      </span>
+      <span class="blockSpan">
+        <ion-icon item-left name="create-outline"></ion-icon> Current State: {{prescription.ReviewStatus}}
+      </span>
+    </ion-card-content>
+    <ion-card-content>
+
+    </ion-card-content>
+  </ion-card>
 </ion-content>
