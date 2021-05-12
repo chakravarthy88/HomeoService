@@ -23,28 +23,28 @@
       <ion-textarea type="text" name="Symptoms" required [(ngModel)]="appointment.Symptoms"></ion-textarea>
     </ion-item>
     <ion-item lines="full">
-      <ion-label position="floating">Temparature</ion-label>
+      <ion-label position="floating">Temperature (F)</ion-label>
       <ion-input type="text" name="Temparature" required [(ngModel)]="appointment.Temparature"></ion-input>
     </ion-item>
     <ion-item lines="full">
-      <ion-label position="floating">Fever Peaks In (Hours)</ion-label>
+      <ion-label position="floating">Fever Peaks in (Hours)</ion-label>
       <ion-input type="text" name="FeverPeaksIn" required [(ngModel)]="appointment.FeverPeaksIn"></ion-input>
     </ion-item>
     <ion-item lines="full">
-      <ion-label position="floating">Mucus Color & Texture</ion-label>
+      <ion-label position="floating">Mucus: Color & texture</ion-label>
       <ion-input type="text" name="MucusColorTexture" required [(ngModel)]="appointment.MucusColorTexture"></ion-input>
     </ion-item>
     <ion-item lines="full">
-      <ion-label position="floating">OXI Meter Reading</ion-label>
+      <ion-label position="floating">SpO2 [Pulse oximeter] Reading</ion-label>
       <ion-input type="text" name="OXIMeterReading" required [(ngModel)]="appointment.OXIMeterReading"></ion-input>
-    </ion-item>
-    <ion-item lines="full">
-      <ion-label position="floating">Peculiar Symptoms</ion-label>
-      <ion-input type="text" name="PeculiarSymptoms" required [(ngModel)]="appointment.PeculiarSymptoms"></ion-input>
     </ion-item>
     <ion-item lines="full">
       <ion-label position="floating">Pulse Rate</ion-label>
       <ion-input type="text" name="PulseRate" required [(ngModel)]="appointment.PulseRate"></ion-input>
+    </ion-item>    
+    <ion-item lines="full">
+      <ion-label position="floating">Peculiar symptoms</ion-label>
+      <ion-input type="text" name="PeculiarSymptoms" required [(ngModel)]="appointment.PeculiarSymptoms"></ion-input>
     </ion-item>
     <ion-item lines="full">
       <ion-label position="floating">Sleep Symptoms</ion-label>
@@ -60,11 +60,11 @@
         <ion-toggle slot="start" name="BodyPains" [(ngModel)]="appointment.BodyPains"></ion-toggle>
       </ion-item>
       <ion-item>
-        <ion-label>Bretheless/Weesing</ion-label>
+        <ion-label>Breathlessness/Wheezing</ion-label>
         <ion-toggle slot="start" name="BrethelessWeesing" [(ngModel)]="appointment.BrethelessWeesing"></ion-toggle>
       </ion-item>
       <ion-item>
-        <ion-label>Chest Tightness</ion-label>
+        <ion-label>Chest tightness</ion-label>
         <ion-toggle slot="start" name="ChestTightness" [(ngModel)]="appointment.ChestTightness"></ion-toggle>
       </ion-item>
       <ion-item>
@@ -76,7 +76,7 @@
         <ion-toggle slot="start" name="Cough" [(ngModel)]="appointment.Cough"></ion-toggle>
       </ion-item>
       <ion-item>
-        <ion-label>Cought Clipping</ion-label>
+        <ion-label>Cough clipping</ion-label>
         <ion-toggle slot="start" name="CoughtClipping" [(ngModel)]="appointment.CoughtClipping"></ion-toggle>
       </ion-item>
       <ion-item>
@@ -88,7 +88,7 @@
         <ion-toggle slot="start" name="Drowsy" [(ngModel)]="appointment.Drowsy"></ion-toggle>
       </ion-item>
       <ion-item>
-        <ion-label>Fever With Chills</ion-label>
+        <ion-label>Fever with chills</ion-label>
         <ion-toggle slot="start" name="FeverWithChills" [(ngModel)]="appointment.FeverWithChills"></ion-toggle>
       </ion-item>
       <ion-item>
@@ -100,7 +100,7 @@
         <ion-toggle slot="start" name="Thirst" [(ngModel)]="appointment.Thirst"></ion-toggle>
       </ion-item>
       <ion-item>
-        <ion-label>Tiered/Restlessness</ion-label>
+        <ion-label>Tired/Restlessness</ion-label>
         <ion-toggle slot="start" name="TieredRestless" [(ngModel)]="appointment.TieredRestless"></ion-toggle>
       </ion-item>
     </ion-list>
