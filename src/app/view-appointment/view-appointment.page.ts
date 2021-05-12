@@ -70,6 +70,12 @@ export class ViewAppointmentPage implements OnInit {
     this.service.showToastMessage("Appointment Sent to Doctor Successfully");
   }
 
+  NoConsultRequired(){
+    this.service.showLoadingSpinner();
+    this.service.completeReview(this.appointment, this.aRouter.snapshot.paramMap.get('uid'));
+    this.service.showToastMessage("Appointment closed without Doctor consultation");
+  }
+  
   CompleteDoctorReview() {
     this.service.showLoadingSpinner();
     this.service.completeReview(this.appointment, this.aRouter.snapshot.paramMap.get('uid'));

@@ -5,7 +5,7 @@
 </ion-header>
 
 <ion-content [fullscreen]="true">
-  <ion-toggle slot="start" name="showClosed" [(ngModel)]="showClosed">Show Closed</ion-toggle>
+  <!-- <ion-toggle slot="start" name="showClosed" [(ngModel)]="showClosed">Show Closed</ion-toggle> -->
   <ion-list>
     <ion-item *ngFor="let appoint of appointments">
       <ion-label>{{appoint.PatientName}} - {{appoint.ReviewStatus}}</ion-label>

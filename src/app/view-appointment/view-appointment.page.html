@@ -111,8 +111,8 @@
 
     <ion-row *ngIf="isL1 === true">
       <ion-col>
-        <ion-button *ngIf="appointment.IsAcquirable" (click)="SendToDoctor()" color="primary" expand="block">Send To
-          Doctor</ion-button>
+        <ion-button *ngIf="appointment.IsAcquirable" (click)="SendToDoctor()" color="primary" expand="block">Send To Doctor</ion-button>
+        <ion-button *ngIf="appointment.IsAcquirable" (click)="NoConsultRequired()" color="primary" expand="block">Consult With Doctor Not Needed</ion-button>
         <ion-button (click)="goToHome()" color="danger" expand="block">Cancel</ion-button>
       </ion-col>
     </ion-row>

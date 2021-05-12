@@ -179,7 +179,7 @@ export class MainService {
       Symptoms: appointment.Symptoms,
       Temparature: appointment.Temparature,
       FeverPeaksIn: appointment.FeverPeaksIn,
-      ReviewStatus: "L2ReviewCompleted",
+      ReviewStatus: "DrReviewCompleted",
       LockedBy: "",
       MucusColorTexture: appointment.MucusColorTexture,
       OXIMeterReading: appointment.OXIMeterReading,
@@ -281,7 +281,7 @@ export class MainService {
   async showToastMessage(message) {
     const toast = await toastController.create({
       color: 'dark',
-      duration: 2000,
+      duration: 3000,
       message: message
     });
     await toast.present();

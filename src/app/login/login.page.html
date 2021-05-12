@@ -24,17 +24,6 @@
         <ion-button type="submit" (click)="logIn(email, password, IAgree)" expand="block">Login</ion-button>
       </ion-col>
     </ion-row>
-    <!-- <ion-row>
-      <ion-col> 
-        <ion-button 
-         type="submit" 
-         color="danger"
-         (click)="authService.GoogleAuth()" 
-         expand="block">
-           Login with Google
-        </ion-button>
-      </ion-col>
-    </ion-row> -->
     <ion-row>
       <ion-col>
         <ion-button type="submit" color="danger" (click)="register()" expand="block">
@@ -44,13 +33,9 @@
     </ion-row>
     <ion-row>
       <ion-col>
-        <ion-item>
-          <ion-list>
-            <ion-item>
-              <ion-label>Agree Terms of Usage & Understand the below guideline</ion-label>
-              <ion-checkbox name="IAgree" #IAgree></ion-checkbox>
-            </ion-item>
-          </ion-list>
+        <ion-item lines="full">
+          <ion-label>Agree Terms of Usage & Understand the below guideline</ion-label>
+          <ion-checkbox name="IAgree" #IAgree></ion-checkbox>
         </ion-item>
       </ion-col>
     </ion-row>
@@ -66,5 +51,16 @@
         </h4>
       </ion-col>
     </ion-row>
+    <!-- <ion-row>
+      <ion-col> 
+        <ion-button 
+         type="submit" 
+         color="danger"
+         (click)="authService.GoogleAuth()" 
+         expand="block">
+           Login with Google
+        </ion-button>
+      </ion-col>
+    </ion-row> -->
   </form>
 </ion-content>

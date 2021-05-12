@@ -13,14 +13,10 @@
           <ion-label>{{prescription.SymptomDate | date:'d, MMM h:mm a'}}</ion-label>
       </ion-card-header>
         <ion-card-content>
-          <ion-icon item-left name="bag-add-outline"></ion-icon>
-          Prescription: {{prescription.DoctorPrescription}}
-            <!-- <ion-icon item-left name="person-outline"></ion-icon>
-            Doctor: {{prescription.TaggedDoctor}}
-          <ion-item item-left *ngIf="!prescription.TaggedDoctor">
-              <ion-icon name="person-outline"></ion-icon>
-              Doctor not assigned, our doctors are working on cases as per prirority. We will inform once your case is received by one of our doctors panel.
-            </ion-item> -->
+          <ion-icon item-left name="bag-add-outline"></ion-icon>Prescription: {{prescription.DoctorPrescription}}
+        </ion-card-content>
+        <ion-card-content>
+          <ion-icon item-left name="bag-add-outline"></ion-icon>Current State: {{prescription.ReviewStatus}}
         </ion-card-content>
       </ion-card>
 </ion-content>
