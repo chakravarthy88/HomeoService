@@ -4,7 +4,7 @@
       <ion-icon name="ellipse"></ion-icon>
       <ion-label>My Family</ion-label>
     </ion-tab-button>
-    <ion-tab-button tab="tab2" *ngIf="isL2 === true || isL1 === true">
+    <ion-tab-button tab="tab2" *ngIf="showQueue">
       <ion-icon name="ellipse"></ion-icon>
       <ion-label>My Queue</ion-label>
     </ion-tab-button>
@@ -20,7 +20,7 @@
     <ion-fab-button (click)="AddNewPatient()" title="Add Patient">
       <ion-icon  name="person-add-outline">Add Patient</ion-icon>
     </ion-fab-button>
-    <ion-fab-button (click)="UnLockAllMyCases()" *ngIf="isL2 === true || isL1 === true"  title="Unlock Appointments">
+    <ion-fab-button (click)="UnLockAllMyCases()" *ngIf="showQueue"  title="Unlock Appointments">
       <ion-icon name="lock-open-outline"></ion-icon>
     </ion-fab-button>
     <ion-fab-button (click)="Reload()" title="Reload Page">

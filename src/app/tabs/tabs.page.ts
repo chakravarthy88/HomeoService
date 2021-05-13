@@ -14,6 +14,7 @@ export class TabsPage {
 
   public isL1: boolean = false;
   public isL2: boolean = false;
+  public showQueue: boolean = false;
 
   constructor(
     private navCtrl: NavController,
@@ -30,13 +31,10 @@ export class TabsPage {
       console.log('wrong-login')
       this.router.navigate(['login']);
     }
-    else {
-      this.isL1 = this.aservice.getUserRole() == 2 ? true : false;
-      this.isL2 = this.aservice.getUserRole() == 3 ? true : false;
-    }
 
     this.isL1 = this.aservice.getUserRole() == 2 ? true : false;
     this.isL2 = this.aservice.getUserRole() == 3 ? true : false;
+    this.showQueue = this.isL1 || this.isL2;
 
     // this.notifications.schedule({
     //   id: 1,
