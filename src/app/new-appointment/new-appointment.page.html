@@ -19,35 +19,35 @@
       </ion-card-content>
     </ion-card> -->
     <ion-item lines="full">
-      <ion-label position="floating">Symptoms</ion-label>
+      <ion-label position="floating">Symptoms <span *ngIf="!Symptoms" class="displayError">*</span></ion-label>
       <ion-textarea type="text" name="Symptoms" required [(ngModel)]="appointment.Symptoms"></ion-textarea>
     </ion-item>
     <ion-item lines="full">
-      <ion-label position="floating">Temperature (F)</ion-label>
+      <ion-label position="floating">Temperature (F) <span *ngIf="!Temparature" class="displayError">*</span></ion-label>
       <ion-input type="text" name="Temparature" required [(ngModel)]="appointment.Temparature"></ion-input>
     </ion-item>
     <ion-item lines="full">
-      <ion-label position="floating">Fever Peaks in (Hours)</ion-label>
+      <ion-label position="floating">Fever Peaks in (Hours) <span *ngIf="!FeverPeaksIn" class="displayError">*</span></ion-label>
       <ion-input type="text" name="FeverPeaksIn" required [(ngModel)]="appointment.FeverPeaksIn"></ion-input>
     </ion-item>
     <ion-item lines="full">
-      <ion-label position="floating">Mucus: Color & Texture</ion-label>
+      <ion-label position="floating">Mucus: Color & Texture <span *ngIf="!MucusColorTexture" class="displayError">*</span></ion-label>
       <ion-input type="text" name="MucusColorTexture" required [(ngModel)]="appointment.MucusColorTexture"></ion-input>
     </ion-item>
     <ion-item lines="full">
-      <ion-label position="floating">SpO2 [Pulse oximeter] Reading</ion-label>
+      <ion-label position="floating">SpO2 [Pulse oximeter] Reading <span *ngIf="!OXIMeterReading" class="displayError">*</span></ion-label>
       <ion-input type="text" name="OXIMeterReading" required [(ngModel)]="appointment.OXIMeterReading"></ion-input>
     </ion-item>
     <ion-item lines="full">
-      <ion-label position="floating">Pulse rate</ion-label>
+      <ion-label position="floating">Pulse rate <span *ngIf="!PulseRate" class="displayError">*</span></ion-label>
       <ion-input type="text" name="PulseRate" required [(ngModel)]="appointment.PulseRate"></ion-input>
     </ion-item>    
     <ion-item lines="full">
-      <ion-label position="floating">Peculiar symptoms</ion-label>
+      <ion-label position="floating">Peculiar symptoms <span *ngIf="!PeculiarSymptoms" class="displayError">*</span></ion-label>
       <ion-input type="text" name="PeculiarSymptoms" required [(ngModel)]="appointment.PeculiarSymptoms"></ion-input>
     </ion-item>
     <ion-item lines="full">
-      <ion-label position="floating">Sleep symptoms</ion-label>
+      <ion-label position="floating">Sleep symptoms <span *ngIf="!SleepSymptoms" class="displayError">*</span></ion-label>
       <ion-input type="text" name="SleepSymptoms" required [(ngModel)]="appointment.SleepSymptoms"></ion-input>
     </ion-item>
     <!-- <ion-item lines="full" *ngIf="!isPatient">
