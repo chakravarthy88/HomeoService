@@ -20,7 +20,8 @@ export class LoginPage implements OnInit {
     public afStore: AngularFirestore,
     public ngFireAuth: AngularFireAuth,
     public mainService: MainService
-) { 
+) 
+{ 
   localStorage.removeItem("User");
   localStorage.removeItem("UserData");
 }
@@ -41,10 +42,10 @@ export class LoginPage implements OnInit {
 
   logIn(email, password, IAgree) {
     if(email.value == "" || password.value == ""){
-      this.mainService.showToastMessage("Mail ID & Password Required");
+      this.mainService.showToastMessage("Valid email & password are required to login");
     }
     else if(!IAgree.checked){
-      this.mainService.showToastMessage("Please select click I Agree to proceed further");
+      this.mainService.showToastMessage("Please agree to the Terms of use to proceed further");
       return;
     }
     else
@@ -62,5 +63,4 @@ export class LoginPage implements OnInit {
   register(){
     this.router.navigate(['register']);
   }
-
 }
