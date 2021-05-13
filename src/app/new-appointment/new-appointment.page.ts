@@ -97,6 +97,7 @@ export class NewAppointmentPage implements OnInit {
   }
   else
   {
+    this.service.showToastMessage("Please Enter all mandatory fields");
      return false;
   }    
   }
