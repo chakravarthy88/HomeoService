@@ -164,11 +164,11 @@ export class AuthenticationService {
         localStorage.setItem('UserData', JSON.stringify(this.userData));
 
         if(this.isEmailVerified()) {
-          this.mainService.showToastMessage("Login Successsful, you will be redirected now");
+          this.mainService.showToastMessage("Login successful, redirecting to secure area");
           this.loginSubscriber.unsubscribe();
           this.router.navigate(['tabs']);  
         } else {
-          this.mainService.showToastMessage('Invalid Credentials, please try again');
+          this.mainService.showToastMessage('Invalid user/password, please try again!');
           return false;
         }
       });
