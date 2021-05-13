@@ -10,6 +10,7 @@ import { Router, NavigationExtras } from '@angular/router';
 export class Tab1Page {
 
   public patients: any[] = [];
+  public searchTerm: string = "";
   
   constructor(private patientService: MainService, private router: Router) {}
 
@@ -19,6 +20,8 @@ export class Tab1Page {
       this.patients = this.patientService.getMyPatients();
     }
   }
+
+
 
   ionViewWillEnter()
   {
@@ -43,5 +46,10 @@ export class Tab1Page {
       }
     };
     this.router.navigate(['view-prescription'], navigationExtras);
+  }
+
+  searchPatients(){
+    
+
   }
 }
