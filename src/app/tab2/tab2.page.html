@@ -1,5 +1,5 @@
 <ion-header [translucent]="true">
-  <ion-toolbar>
+  <ion-toolbar class="headerBg">
     <ion-title> My Queue </ion-title>
   </ion-toolbar>
 </ion-header>
@@ -8,10 +8,31 @@
   <!-- <ion-toggle slot="start" name="showClosed" [(ngModel)]="showClosed">Show Closed</ion-toggle> -->
   <ion-list>
     <ion-item *ngFor="let appoint of appointments">
-      <ion-label>{{appoint.PatientName}} - {{appoint.ReviewStatus}}</ion-label>
-      <ion-button *ngIf="appoint.IsAcquirable" (click)="LockAppointment(appoint.uid)" color="primary" expand="block" class="fa fa-stethoscope">
-        <ion-icon name="create-outline"></ion-icon>
-      </ion-button>
+        <ion-grid>
+            <ion-row>
+              <ion-col>
+                <div>
+                    <ion-icon item-left name="person-outline"></ion-icon> Patient: {{appoint.PatientName}}
+                </div>
+              </ion-col>
+            </ion-row>
+            <ion-row>
+                <ion-col>
+                  <div>
+                      <ion-icon item-left name="create-outline"></ion-icon> Current State: {{appoint.ReviewStatus}}
+                  </div>
+                </ion-col>
+              </ion-row>
+              <ion-row>
+                <ion-col>
+                    <ion-button *ngIf="appoint.IsAcquirable" (click)="LockAppointment(appoint.uid)" color="primary" expand="block" class="fa fa-stethoscope">
+                        <ion-icon name="create-outline"></ion-icon> View Appointment
+                      </ion-button>
+                </ion-col>
+              </ion-row>
+          </ion-grid>
+     
+     
     </ion-item>
   </ion-list>
 </ion-content>
