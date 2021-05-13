@@ -7,6 +7,7 @@ import { AngularFireAuth } from "@angular/fire/auth";
 import { AngularFirestore, AngularFirestoreDocument } from '@angular/fire/firestore';
 import { Patient } from './patient.model';
 import { Appointment } from './appointment.model';
+import { Subscription } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -18,6 +19,7 @@ export class MainService {
   patientInfo: Patient;
   public patients: any[] = [];
   public appoints: any[] = [];
+  public apptSubscriber: Subscription;
 
   constructor(
     public afStore: AngularFirestore,
@@ -119,11 +121,13 @@ export class MainService {
   }
 
   UnLockAllMyCases(uid) {
-    this.afStore.collection("Appointments", ref => ref.where("LockedBy", "==", uid))
+    var appoinments = [];
+    this.apptSubscriber = this.afStore.collection("Appointments", ref => ref.where("LockedBy", "==", uid))
       .get()
       .subscribe(a => {
-        a.forEach(aa => this.UnLockAppointment(aa))
+        a.forEach(aa => this.appoints.push(aa))
       });
+    this.apptSubscriber.unsubscribe();
     this.showToastMessage("Unlock all patients successfull");
     this.router.navigate(['tabs']);
   }
