@@ -6,6 +6,7 @@ import { AngularFireAuth } from "@angular/fire/auth";
 import { AngularFirestore, AngularFirestoreDocument } from '@angular/fire/firestore';
 import { JsonPipe } from '@angular/common';
 import { MainService } from "../shared/main.service";
+import { Subscription } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -13,7 +14,8 @@ import { MainService } from "../shared/main.service";
 
 export class AuthenticationService {
   public userData: any = {};
-
+  public loginSubscriber: Subscription;
+  
   constructor(
     public afStore: AngularFirestore,
     public ngFireAuth: AngularFireAuth,
@@ -145,7 +147,7 @@ export class AuthenticationService {
     //   merge: true
     // })
 
-    await this.afStore
+    this.loginSubscriber = this.afStore
       .collection('Users', ref => ref.where("uid", "==", User.uid))
       .valueChanges()
       .subscribe(a => {
@@ -163,6 +165,7 @@ export class AuthenticationService {
 
         if(this.isEmailVerified()) {
           this.mainService.showToastMessage("Login Successsful, you will be redirected now");
+          this.loginSubscriber.unsubscribe();
           this.router.navigate(['tabs']);  
         } else {
           this.mainService.showToastMessage('Invalid Credentials, please try again');
