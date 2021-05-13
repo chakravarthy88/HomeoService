@@ -163,7 +163,7 @@ export class AuthenticationService {
 
         if(this.isEmailVerified()) {
           this.mainService.showToastMessage("Login Successsful, you will be redirected now");
-          this.router.navigateByUrl('/tabs');  
+          this.router.navigate(['tabs']);  
         } else {
           this.mainService.showToastMessage('Invalid Credentials, please try again');
           return false;
