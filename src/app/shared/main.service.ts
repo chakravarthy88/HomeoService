@@ -237,6 +237,7 @@ export class MainService {
       DoctorPrescription: data.DoctorPrescription,
       FeverPeaksIn: data.FeverPeaksIn,
       ReviewStatus: data.ReviewStatus,
+      ReviewStatusColor: this.getStatusColor(data.ReviewStatus),
       LockedBy: data.LockedBy,
       IsAcquirable: data.LockedBy == '' || data.LockedBy == this.getUserUID(),
       MucusColorTexture: data.MucusColorTexture,
@@ -280,6 +281,15 @@ export class MainService {
       });
     console.log(this.appoints);
     return this.appoints;
+  }
+
+  getStatusColor (status) {
+    switch (status) {
+      case 'ReadyForReview': return 'danger'; break; //red
+      case 'L1ReviewCompleted': return 'warning'; break; //yellow/orange
+      case 'DrReviewCompleted': return 'success'; break; //green
+      default: return 'primary'; //blue
+    }
   }
 
   async showToastMessage(message) {

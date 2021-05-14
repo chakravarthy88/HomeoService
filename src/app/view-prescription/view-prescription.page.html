@@ -18,7 +18,10 @@
         <ion-icon item-left name="bag-add-outline"></ion-icon> Prescription: {{prescription.DoctorPrescription}}
       </span>
       <span class="blockSpan">
-        <ion-icon item-left name="create-outline"></ion-icon> Current State: {{prescription.ReviewStatus}}
+        <ion-icon item-left name="create-outline"></ion-icon> Current State:
+        <ion-text color="{{prescription.ReviewStatusColor}}">
+          <h3>{{prescription.ReviewStatus}}</h3>
+        </ion-text>
       </span>
     </ion-card-content>
   </ion-card>
