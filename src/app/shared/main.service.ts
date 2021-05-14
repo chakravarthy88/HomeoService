@@ -110,14 +110,14 @@ export class MainService {
     return this.afStore
       .collection('Patients')
       .doc(uid)
-      .valueChanges();
+      .get();
   }
 
   getAppointmentId(uid) {
     return this.afStore
       .collection('Appointments')
       .doc(uid)
-      .valueChanges();
+      .get();
   }
 
   UnLockAllMyCases(uid) {
