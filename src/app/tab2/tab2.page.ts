@@ -13,11 +13,13 @@ import { AlertController } from '@ionic/angular';
 export class Tab2Page {
 
   public appointments: any[] = [];
+  public searchResults: any[] = [];
   public isL1: boolean = false;
   public isL2: boolean = false;
   public showClosed: boolean = false;
   public userUID: boolean = false;
   public searchTerm: string = "";
+
 
   constructor(private service: MainService, private aservice: AuthenticationService, private router: Router, private alertCtrl: AlertController) { }
 
@@ -27,24 +29,51 @@ export class Tab2Page {
 
   ionViewWillEnter() {
     this.userUID = this.aservice.getUserData().uid;
-    this.setPageStateByRole();
+    this.setPageStateByRole(true);
   }
 
-  setPageStateByRole() {
-    this.service.showLoadingSpinner();   
+  setPageStateByRole(isloadSpinner) {
+    if(isloadSpinner)
+    this.service.showLoadingSpinner();
     this.appointments = [];
+    this.searchResults = []
+
     this.isL1 = this.aservice.getUserRole() == 2 ? true : false;
     this.isL2 = this.aservice.getUserRole() == 3 ? true : false;
     if (this.isL1)
+    {
       this.appointments = this.service.getL1Appointments();
+      this.searchResults = this.appointments;
+    }
     else if (this.isL2)
       this.appointments = this.service.getL2Appointments();
-  }
-
-  searchPatients(){
-    
+      this.searchResults = this.appointments;
 
   }
+
+  searchQueue(){
+    if(this.searchTerm.length>2)
+    {
+    console.log(this.appointments); 
+    //this.searchResults = this.appointments;
+    this.searchResults = this.appointments.find(element => element.PatientInfo.FirstName.startsWith(this.searchTerm));
+    this.appointments = this.searchResults;
+    console.log(this.appointments);   
+    }
+    else if(this.searchTerm.length == 0)
+    {
+      this.setPageStateByRole(false)
+       //this.searchResults = this.appointments;
+    } 
+
+  }
+
+  searchFunction (element, index, array)
+  {
+    console.log(this.searchTerm);
+      return element.indexOf(this.searchTerm) > 0;
+  }
+
   async LockAppointment(uid) {
     const al = await this.alertCtrl.create({
       header: 'Are you sure?',
