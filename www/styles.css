@@ -131,9 +131,9 @@
    * -------------------------------------------
    */
   .ios body {
-    --ion-background-color: #000000;
+    --ion-background-color: hsl(27, 88%, 59%);
     --ion-background-color-rgb: 0,0,0;
-    --ion-text-color: #ffffff;
+    --ion-text-color: #f7a354;
     --ion-text-color-rgb: 255,255,255;
     --ion-color-step-50: #0d0d0d;
     --ion-color-step-100: #1a1a1a;
@@ -1251,4 +1251,29 @@ sub {
 }
 .ion-align-items-baseline {
   align-items: baseline !important;
+}
+ion-content {
+  background: url(https://img.freepik.com/free-photo/homeopathy-herbal-extracts-small-bottles_73944-9306.jpg?size=626&ext=jpg) no-repeat center center fixed !important;
+  background-size: cover !important;
+  background-color: #3880ff;
+}
+.displayError {
+  border-bottom: 1px solid orange !important;
+  color: red;
+}
+ion-header {
+  background-color: #3880ff;
+  color: #FFFFFF;
+  margin-bottom: 10px;
+}
+.blockSpan {
+  Width: 100%;
+  float: left;
+  margin-bottom: 5px;
+}
+.headerBg {
+  background-color: #3880ff;
+}
+ion-toolbar {
+  background-color: #3880ff;
 }
