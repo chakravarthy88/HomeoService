@@ -13,7 +13,7 @@ import { AlertController } from '@ionic/angular';
 export class Tab2Page {
 
   public appointments: any[] = [];
-  public searchResults: any[] = [];
+  public appointmentsBackup: any[] = [];
   public isL1: boolean = false;
   public isL2: boolean = false;
   public showClosed: boolean = false;
@@ -36,43 +36,32 @@ export class Tab2Page {
     if(isloadSpinner)
     this.service.showLoadingSpinner();
     this.appointments = [];
-    this.searchResults = []
 
     this.isL1 = this.aservice.getUserRole() == 2 ? true : false;
     this.isL2 = this.aservice.getUserRole() == 3 ? true : false;
     if (this.isL1)
     {
       this.appointments = this.service.getL1Appointments();
-      this.searchResults = this.appointments;
+      
     }
     else if (this.isL2)
       this.appointments = this.service.getL2Appointments();
-      this.searchResults = this.appointments;
+      
 
   }
 
-  searchQueue(){
-    if(this.searchTerm.length>2)
-    {
-    console.log(this.appointments); 
-    //this.searchResults = this.appointments;
-    this.searchResults = this.appointments.find(element => element.PatientInfo.FirstName.startsWith(this.searchTerm));
-    this.appointments = this.searchResults;
-    console.log(this.appointments);   
+  async filterList(evt) {
+    this.appointments = this.appointmentsBackup;
+    const searchTerm = evt.srcElement.value;
+  
+    if (!searchTerm) {
+      return;
     }
-    else if(this.searchTerm.length == 0)
-    {
-      this.setPageStateByRole(false)
-       //this.searchResults = this.appointments;
-    } 
+  console.log(searchTerm);
+    this.appointments = this.appointments.filter(appnt => appnt.PatientInfo.FirstName.toLowerCase().indexOf(searchTerm.toLowerCase()) > -1); 
+    console.log("filtered res ");
+  }  
 
-  }
-
-  searchFunction (element, index, array)
-  {
-    console.log(this.searchTerm);
-      return element.indexOf(this.searchTerm) > 0;
-  }
 
   async LockAppointment(uid) {
     const al = await this.alertCtrl.create({

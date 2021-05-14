@@ -55,3 +55,9 @@ ion-header{
 ion-toolbar{
     background-color: #3880ff;
 }
+
+ion-alert {
+    &.alertClass{
+      background: rgb(0,0,0,.8);
+    }
+  }

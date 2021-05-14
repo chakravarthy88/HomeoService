@@ -23,6 +23,11 @@
           <span>{{prescription.ReviewStatus}}</span>
         </ion-text>
       </span>
+      <span class="blockSpan">   
+        <ion-button color="danger" expand ="clear" (click)="cancelAppointment(prescription.uid)" > 
+          <ion-icon slot="start" name="close-circle"></ion-icon>
+          Cancel Appointment
+        </ion-button></span>
     </ion-card-content>
   </ion-card>
 </ion-content>

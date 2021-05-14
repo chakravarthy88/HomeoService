@@ -283,6 +283,13 @@ export class MainService {
     return this.appoints;
   }
 
+  updateReviewStatus(apptId, status)
+  {
+    this.afStore.collection("Appointments").doc(apptId).update({
+      ReviewStatus: status
+    });
+  }
+
   getStatusColor (status) {
     switch (status) {
       case 'ReadyForReview': return 'danger'; break; //red
