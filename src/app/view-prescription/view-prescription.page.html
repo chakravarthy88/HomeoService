@@ -18,8 +18,16 @@
         <ion-icon item-left name="bag-add-outline"></ion-icon> Prescription: {{prescription.DoctorPrescription}}
       </span>
       <span class="blockSpan">
-        <ion-icon item-left name="create-outline"></ion-icon> Current State: {{prescription.ReviewStatus}}
+        <ion-icon item-left name="create-outline"></ion-icon> Current State:
+        <ion-text color="{{prescription.ReviewStatusColor}}">
+          <span>{{prescription.ReviewStatus}}</span>
+        </ion-text>
       </span>
+      <span class="blockSpan">   
+        <ion-button color="danger" expand ="clear" (click)="cancelAppointment(prescription.uid)" > 
+          <ion-icon slot="start" name="close-circle"></ion-icon>
+          Cancel Appointment
+        </ion-button></span>
     </ion-card-content>
   </ion-card>
 </ion-content>

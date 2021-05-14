@@ -80,7 +80,7 @@ export class MainService {
     console.log('loading-appoints');
     this.appoints = [];
     this.afStore
-      .collection('Appointments', ref => ref.where("ReviewStatus", "==", "ReadyForReview"))
+      .collection('Appointments', ref => ref.where("ReviewStatus", "==", "ReadyForReview").orderBy("SymptomDate", "desc"))
       .get()
       .subscribe(a => {
         a.forEach(aa =>
@@ -96,7 +96,7 @@ export class MainService {
     this.appoints = [];
 
     this.afStore
-      .collection('Appointments', ref => ref.where("ReviewStatus", "==", "L1ReviewCompleted"))
+      .collection('Appointments', ref => ref.where("ReviewStatus", "==", "L1ReviewCompleted").orderBy("SymptomDate", "desc"))
       .get()
       .subscribe(a => {
         a.forEach(aa =>
@@ -243,6 +243,7 @@ export class MainService {
       DoctorPrescription: data.DoctorPrescription,
       FeverPeaksIn: data.FeverPeaksIn,
       ReviewStatus: data.ReviewStatus,
+      ReviewStatusColor: this.getStatusColor(data.ReviewStatus),
       LockedBy: data.LockedBy,
       IsAcquirable: data.LockedBy == '' || data.LockedBy == this.getUserUID(),
       MucusColorTexture: data.MucusColorTexture,
@@ -277,7 +278,7 @@ export class MainService {
     console.log('loading-PatientAllAppointments', PatientID);
     this.appoints = [];
     this.afStore
-      .collection('Appointments', ref => ref.where("PatientID", "==", PatientID))
+      .collection('Appointments', ref => ref.where("PatientID", "==", PatientID).orderBy("SymptomDate", "desc"))
       .get()
       .subscribe(a => {
         a.forEach(aa =>

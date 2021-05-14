@@ -10,6 +10,7 @@ export interface Appointment {
     
 
     ReviewStatus: string;
+    ReviewStatusColor: string;
     LockedBy: boolean;
 
     //MailID: string;
