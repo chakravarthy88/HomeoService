@@ -319,4 +319,19 @@ export class MainService {
 
     await loading.present();
   }
+  getStatusColor (status) {
+    switch (status) {
+      // case 'ReadyForReview': return 'danger'; break; //red
+      // case 'L1ReviewCompleted': return 'warning'; break; //yellow/orange
+      // case 'DrReviewCompleted': return 'success'; break; //green
+      default: return 'primary'; //blue
+    }
+  }
+
+  updateReviewStatus(apptId, status)
+  {
+    this.afStore.collection("Appointments").doc(apptId).update({
+      ReviewStatus: status
+    });
+  }
 }
