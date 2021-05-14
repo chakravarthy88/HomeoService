@@ -8,4 +8,7 @@ export interface Patient {
     Gender: string;
     TaggedDoctor: string;
     Address: string;
+    TestedPositive: boolean;
+    TestedDate: Date;
+    Vaccinated: boolean;
  }

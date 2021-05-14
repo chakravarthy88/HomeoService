@@ -2,7 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { MainService } from "../shared/main.service";
 import { AuthenticationService } from "../shared/authentication.service";
-import { AlertController } from '@ionic/angular';
+import { AlertController, ModalController } from '@ionic/angular';
+import { ViewPrescriptionPage } from '../view-prescription/view-prescription.page';
+import { QuickViewPrescriptionsPage } from '../quick-view-prescriptions/quick-view-prescriptions.page';
 
 @Component({
   selector: 'app-view-appointment',
@@ -30,7 +32,8 @@ export class ViewAppointmentPage implements OnInit {
     private aservice: AuthenticationService,
     private router: Router,
     private aRouter: ActivatedRoute,
-    private alertCtl: AlertController
+    private alertCtl: AlertController,
+    private modalController: ModalController
   ) { }
 
   ngOnInit() {
@@ -53,21 +56,6 @@ export class ViewAppointmentPage implements OnInit {
         }
       }
     });
-
-    // this.service.getAppointmentId(this.apptUID).subscribe(res => {
-    //   this.appointment = this.service.buildAppointment(res, this.apptUID);
-    //   this.patientInfo = this.appointment.PatientInfo;
-    //   this.appointment.IsAcquirable = this.appointment.LockedBy === '' || this.appointment.LockedBy === this.service.getUserUID();
-    //   if (!this.appointment.IsAcquirable) {
-    //     this.AppointmentNotAvailable();
-    //   }
-    //   else {
-    //     if(this.appointment.LockedBy != this.service.getUserUID())
-    //     {
-    //       this.service.LockAppointment(this.apptUID, userUID);
-    //     }
-    //   }
-    // });
   }
 
   async AppointmentNotAvailable() {
@@ -132,5 +120,24 @@ export class ViewAppointmentPage implements OnInit {
     var drName = this.aservice.getUserData().displayName;
     this.service.tagDoctor(this.appointment.PatientID, drName);
     this.service.showToastMessage("Review Completed Successfully");
+  }
+
+
+  // let currentModal = null;
+  // const button = document.querySelector('ion-button');
+  // button.addEventListener('click', createModal);
+
+  private currentModel =  {};
+  async createModal() {
+    const modal = await this.modalController.create({
+      component: QuickViewPrescriptionsPage,
+      componentProps: {
+        'uid': this.appointment.PatientID,
+        'modalController': this.modalController
+      }
+    });
+
+    await modal.present();
+    this.currentModel = modal;
   }
 }

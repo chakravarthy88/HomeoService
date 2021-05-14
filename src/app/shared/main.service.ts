@@ -19,6 +19,7 @@ export class MainService {
   patientInfo: Patient;
   public patients: any[] = [];
   public appoints: any[] = [];
+  public boAppts: any[] = [];
   public apptSubscriber: Subscription;
 
   constructor(
@@ -102,7 +103,7 @@ export class MainService {
           this.appoints.push(this.buildAppointmentWithDoc(aa.data(), aa))
         )
       });
-    console.log(this.appoints);
+    //console.log(this.appoints);
     return this.appoints;
   }
 
@@ -167,7 +168,8 @@ export class MainService {
       FeverWithChills: appointment.FeverWithChills,
       Nausea: appointment.Nausea,
       Thirst: appointment.Thirst,
-      TieredRestless: appointment.TieredRestless
+      TieredRestless: appointment.TieredRestless,
+      DoctorPrescription: appointment.DoctorPrescription
     });
     this.router.navigate(['']);
   }
@@ -201,7 +203,8 @@ export class MainService {
       FeverWithChills: appointment.FeverWithChills,
       Nausea: appointment.Nausea,
       Thirst: appointment.Thirst,
-      TieredRestless: appointment.TieredRestless
+      TieredRestless: appointment.TieredRestless,
+      DoctorPrescription: appointment.DoctorPrescription
     });
     this.showToastMessage("Review completed");
     this.router.navigate(['']);
@@ -221,7 +224,10 @@ export class MainService {
       Age: data.Age,
       Address: data.Address,
       Gender: data.Gender,
-      TaggedDoctor: data.TaggedDoctor
+      TaggedDoctor: data.TaggedDoctor,
+      Vaccinated: data.Vaccinated,
+      TestedPositive: data.TestedPositive,
+      TestedDate: data.TestedPositive 
     };
     return patientInfo;
   }
@@ -278,8 +284,21 @@ export class MainService {
           this.appoints.push(this.buildAppointmentWithDoc(aa.data(), aa))
         )
       });
-    console.log(this.appoints);
+    //console.log(this.appoints);
     return this.appoints;
+  }
+
+  getBackOfficeReports() {
+    this.boAppts = [];
+    this.afStore
+      .collection("Appointments", ref => ref.where("ReviewStatus", "!=", "DrReviewCompleted"))
+      .get()
+      .subscribe(a => {
+        a.forEach(aa => 
+          this.boAppts.push(this.buildAppointmentWithDoc(aa.data(), aa))
+        )
+      });
+    return this.boAppts;
   }
 
   async showToastMessage(message) {

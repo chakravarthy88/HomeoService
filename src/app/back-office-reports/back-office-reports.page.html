@@ -1,0 +1,26 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Back Office Reports</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-grid class="ion-margin">
+    <ion-row>
+      <ion-col>Patient Name</ion-col>
+      <ion-col>Mobile Number</ion-col>
+      <ion-col>Tagged Doctor</ion-col>
+      <ion-col>Appointment Created</ion-col>
+      <ion-col>LockedBy</ion-col>
+      <ion-col>Current Status</ion-col>
+    </ion-row>
+    <ion-row *ngFor="let appt of boAppts">
+      <ion-col>{{ appt.PatientName }}</ion-col>
+      <ion-col>{{ appt.PatientInfo.Mobile }}</ion-col>
+      <ion-col>{{ appt.TaggedDoctor }}</ion-col>
+      <ion-col>{{ appt.SymptomDate | date:'d, MMM h:mm a' }}</ion-col>
+      <ion-col>{{ appt.LockedBy }}</ion-col>
+      <ion-col>{{ appt.ReviewStatus }}</ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-content>

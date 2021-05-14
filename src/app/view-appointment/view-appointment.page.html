@@ -6,7 +6,6 @@
     <ion-title>View Appointment</ion-title>
   </ion-toolbar>
 </ion-header>
-
 <ion-content>
   <form>
     <input type="hidden" name="uid" [(ngModel)]="appointment.uid" />
@@ -15,11 +14,8 @@
         <ion-label>Patient Name: {{appointment.PatientName}}</ion-label><br/>
         <ion-label>Mobile #: {{patientInfo.Mobile}}</ion-label>
       </ion-card-header>
-      <!-- <ion-card-content>
-        <ion-icon item-left name="user-icon"></ion-icon>
-        Mobile: {{patientInfo.Mobile}}
-      </ion-card-content> -->
     </ion-card>
+    <ion-button expand="full" (click)="createModal()">Show Old Prescriptions</ion-button>
     <ion-item lines="full">
       <ion-label position="floating">Symptoms <span *ngIf="!Symptoms" class="displayError">*</span></ion-label>
       <ion-textarea type="text" name="Symptoms" [ngClass]="{'displayError' : !Symptoms}" required [(ngModel)]="appointment.Symptoms"></ion-textarea>

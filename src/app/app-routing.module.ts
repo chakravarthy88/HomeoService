@@ -54,7 +54,15 @@ const routes: Routes = [
   {
     path: 'view-prescription',
     loadChildren: () => import('./view-prescription/view-prescription.module').then( m => m.ViewPrescriptionPageModule)
+  },  {
+    path: 'quick-view-prescriptions',
+    loadChildren: () => import('./quick-view-prescriptions/quick-view-prescriptions.module').then( m => m.QuickViewPrescriptionsPageModule)
+  },
+  {
+    path: 'back-office-reports',
+    loadChildren: () => import('./back-office-reports/back-office-reports.module').then( m => m.BackOfficeReportsPageModule)
   }
+
 
 ];
 @NgModule({

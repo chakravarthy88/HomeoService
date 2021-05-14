@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Input, Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { MainService } from "../shared/main.service";
 
@@ -11,6 +11,7 @@ import { MainService } from "../shared/main.service";
 export class ViewPrescriptionPage implements OnInit {
 
   public prescriptions: any = {};
+  @Input()
   public uid: any;
   public patientInfo: any = {};
 
