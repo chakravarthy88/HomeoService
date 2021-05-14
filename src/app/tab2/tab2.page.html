@@ -2,6 +2,10 @@
   <ion-toolbar class="headerBg">
     <ion-title> My Queue </ion-title>
   </ion-toolbar>
+  <ion-toolbar>
+      <ion-searchbar animated placeholder="Enter name or mobile" color="default" [(ngModel)]="searchTerm"
+      (ionChange)="searchQueue()"></ion-searchbar>
+    </ion-toolbar>
 </ion-header>
 
 <ion-content [fullscreen]="true">

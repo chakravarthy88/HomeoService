@@ -17,6 +17,7 @@ export class Tab2Page {
   public isL2: boolean = false;
   public showClosed: boolean = false;
   public userUID: boolean = false;
+  public searchTerm: string = "";
 
   constructor(private service: MainService, private aservice: AuthenticationService, private router: Router, private alertCtrl: AlertController) { }
 
@@ -40,6 +41,10 @@ export class Tab2Page {
       this.appointments = this.service.getL2Appointments();
   }
 
+  searchPatients(){
+    
+
+  }
   async LockAppointment(uid) {
     const al = await this.alertCtrl.create({
       header: 'Are you sure?',
