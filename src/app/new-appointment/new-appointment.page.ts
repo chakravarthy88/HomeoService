@@ -43,15 +43,9 @@ export class NewAppointmentPage implements OnInit {
   ngOnInit() {
     this.uid = this.aRouter.snapshot.paramMap.get('uid');
     this.isPatient = this.service.getUserRole() == null || this.service.getUserRole() == undefined || this.service.getUserRole() == 1;
-    this.savePatientSubscription = this.getPatientById(this.aRouter.snapshot.paramMap.get('uid'));
-    this.savePatientSubscription.subscribe(res => {
-      this.patientInfo = res;
+    var patientDoc = this.service.getPatientById(this.aRouter.snapshot.paramMap.get('uid')).forEach(a =>{
+      this.patientInfo = a.data();
     });
-  }
-
-  getPatientById(uid)
-  {
-    return this.service.getPatientById(uid);
   }
 
   checkValidation(){

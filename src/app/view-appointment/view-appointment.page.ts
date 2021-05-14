@@ -34,24 +34,40 @@ export class ViewAppointmentPage implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.apptUID = this.aRouter.snapshot.paramMap.get('uid');
+    this.apptUID = this.aRouter.snapshot.paramMap.get('uid');    
     this.setRoles();
-    this.service.getAppointmentId(this.apptUID).subscribe(res => {
-      this.appointment = this.service.buildAppointment(res, this.apptUID);
+
+    this.service.getAppointmentId(this.apptUID).forEach(a => {
+      this.appointment = this.service.buildAppointment(a.data(), this.apptUID);
       this.patientInfo = this.appointment.PatientInfo;
       this.appointment.IsAcquirable = this.appointment.LockedBy === '' || this.appointment.LockedBy === this.service.getUserUID();
       if (!this.appointment.IsAcquirable) {
         this.AppointmentNotAvailable();
       }
       else {
-        var userData = JSON.parse(localStorage.getItem('UserData'))
-        var userUID = userData.userInDB.uid;
         if(this.appointment.LockedBy != this.service.getUserUID())
         {
+          var userData = JSON.parse(localStorage.getItem('UserData'))
+          var userUID = userData.userInDB.uid;      
           this.service.LockAppointment(this.apptUID, userUID);
         }
       }
     });
+
+    // this.service.getAppointmentId(this.apptUID).subscribe(res => {
+    //   this.appointment = this.service.buildAppointment(res, this.apptUID);
+    //   this.patientInfo = this.appointment.PatientInfo;
+    //   this.appointment.IsAcquirable = this.appointment.LockedBy === '' || this.appointment.LockedBy === this.service.getUserUID();
+    //   if (!this.appointment.IsAcquirable) {
+    //     this.AppointmentNotAvailable();
+    //   }
+    //   else {
+    //     if(this.appointment.LockedBy != this.service.getUserUID())
+    //     {
+    //       this.service.LockAppointment(this.apptUID, userUID);
+    //     }
+    //   }
+    // });
   }
 
   async AppointmentNotAvailable() {
