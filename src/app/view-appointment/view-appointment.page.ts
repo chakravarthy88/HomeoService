@@ -129,7 +129,8 @@ export class ViewAppointmentPage implements OnInit {
   CompleteDoctorReview() {
     this.service.showLoadingSpinner();
     this.service.completeReview(this.appointment, this.aRouter.snapshot.paramMap.get('uid'));
-    var drName = this.aservice.getUserData().displayName;
+    //var drName = this.aservice.getUserData().displayName;
+    var drName = this.aservice.getUserData().userInDB.displayName;
     this.service.tagDoctor(this.appointment.PatientID, drName);
     this.service.showToastMessage("Review Completed Successfully");
   }
