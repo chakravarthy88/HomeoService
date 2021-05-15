@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { MainService } from "../shared/main.service";
 import { AlertController, ModalController } from '@ionic/angular';
+import { ViewPrescriptionPage } from '../view-prescription/view-prescription.page';
 
 @Component({
   selector: 'app-quick-view-prescriptions',
@@ -21,5 +22,4 @@ export class QuickViewPrescriptionsPage implements OnInit {
   dismissModal() {
     this.modalController.dismiss();
   }
-
 }

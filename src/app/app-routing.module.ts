@@ -36,6 +36,10 @@ const routes: Routes = [
     loadChildren: () => import('./add-patient/add-patient.module').then( m => m.AddPatientPageModule)
   },
   {
+    path: 'add-patient/:uid',
+    loadChildren: () => import('./add-patient/add-patient.module').then( m => m.AddPatientPageModule)
+  },
+  {
     path: 'new-appointment/:uid',
     loadChildren: () => import('./new-appointment/new-appointment.module').then( m => m.NewAppointmentPageModule)
   },
@@ -54,7 +58,8 @@ const routes: Routes = [
   {
     path: 'view-prescription',
     loadChildren: () => import('./view-prescription/view-prescription.module').then( m => m.ViewPrescriptionPageModule)
-  },  {
+  },
+  {
     path: 'quick-view-prescriptions',
     loadChildren: () => import('./quick-view-prescriptions/quick-view-prescriptions.module').then( m => m.QuickViewPrescriptionsPageModule)
   },

@@ -1252,19 +1252,9 @@ sub {
 .ion-align-items-baseline {
   align-items: baseline !important;
 }
-ion-content {
-  background: url(https://img.freepik.com/free-photo/homeopathy-herbal-extracts-small-bottles_73944-9306.jpg?size=626&ext=jpg) no-repeat center center fixed !important;
-  background-size: cover !important;
-  background-color: #3880ff;
-}
 .displayError {
   border-bottom: 1px solid orange !important;
   color: red;
-}
-ion-header {
-  background-color: #3880ff;
-  color: #FFFFFF;
-  margin-bottom: 10px;
 }
 .blockSpan {
   Width: 100%;
@@ -1276,4 +1266,7 @@ ion-header {
 }
 ion-toolbar {
   background-color: #3880ff;
+}
+ion-alert.alertClass {
+  background: rgba(0, 0, 0, 0.8);
 }

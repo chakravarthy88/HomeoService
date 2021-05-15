@@ -34,7 +34,9 @@ export class TabsPage {
 
     this.isL1 = this.aservice.getUserRole() == 2 ? true : false;
     this.isL2 = this.aservice.getUserRole() == 3 ? true : false;
-    this.showQueue = this.isL1 || this.isL2;
+    setTimeout(() => this.showQueue = this.isL1 || this.isL2 , 300);
+    
+    //this.showQueue = this.isL1 || this.isL2;
 
     // this.notifications.schedule({
     //   id: 1,

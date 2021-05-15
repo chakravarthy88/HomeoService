@@ -9,16 +9,20 @@
     <ion-card class="cardbg" *ngFor="let patient of patients">
       <ion-card-header>
         <ion-card-title>{{patient.FirstName | uppercase }}, {{patient.LastName  | uppercase }}</ion-card-title>
-        <ion-card-subtitle>{{patient.TaggedDoctor}}</ion-card-subtitle>
+        <ion-card-subtitle>Tagged To - {{patient.TaggedDoctor}}</ion-card-subtitle>
         <ion-card-subtitle>{{patient.Mobile}}</ion-card-subtitle>
       </ion-card-header>    
+            <ion-button color="primary" class="btnSize" expand ="block" (click)="EditPatient(patient.uid)" > 
+                <ion-icon slot="start" name="calendar-number-outline"></ion-icon>
+                Edit Patient
+            </ion-button>
             <ion-button color="primary" class="btnSize" expand ="block" (click)="NewAppointment(patient.uid)" > 
                 <ion-icon slot="start" name="calendar-number-outline"></ion-icon>
-                Appointment
-              </ion-button>
+                New Appointment
+            </ion-button>
             <ion-button color="primary" class="btnSize" expand ="block" (click)="viewPrescription(patient.uid)" > 
                 <ion-icon slot="start" name="medkit-outline"></ion-icon>
                 Appt History / Precription
-              </ion-button>
+            </ion-button>
     </ion-card>
 </ion-content>

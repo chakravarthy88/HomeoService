@@ -1,7 +1,7 @@
 import { DebugElement, Injectable, NgZone } from '@angular/core';
 import { loadingController, toastController } from '@ionic/core';
 import { firebase } from 'firebase/firebase-auth'
-import { AngularFireDatabase, AngularFireObject } from '@angular/fire/database';
+import { AngularFireAction, AngularFireList, AngularFireDatabaseModule, AngularFireDatabase, AngularFireObject } from '@angular/fire/database';
 import { Router } from "@angular/router";
 import { AngularFireAuth } from "@angular/fire/auth";
 import { AngularFirestore, AngularFirestoreDocument } from '@angular/fire/firestore';
@@ -50,6 +50,10 @@ export class MainService {
 
   SavePatient(patient) {
     return this.afStore.collection('Patients').add(patient);
+  }
+
+  UpdatePatient(patient, uid) {
+    return this.afStore.collection('Patients').doc(uid).update(patient);
   }
 
   SaveAppointment(appoint) {
@@ -121,6 +125,13 @@ export class MainService {
       .get();
   }
 
+  async getPatientAppointments(patientuid) {
+    //TBD: var apptRef = this.afStore.collection("Appointments");
+    return await this.afStore
+      .collection('Appointments', ref => ref.where("PatientID", "==", patientuid))
+      .get();
+  }
+
   UnLockAllMyCases(uid) {
     var appoinments = [];
     this.apptSubscriber = this.afStore.collection("Appointments", ref => ref.where("LockedBy", "==", uid))
@@ -171,7 +182,7 @@ export class MainService {
       TieredRestless: appointment.TieredRestless,
       DoctorPrescription: appointment.DoctorPrescription
     });
-    this.router.navigate(['']);
+    this.router.navigate(['tabs/tab2']);
   }
 
   tagDoctor(uid, name) {
@@ -207,7 +218,7 @@ export class MainService {
       DoctorPrescription: appointment.DoctorPrescription
     });
     this.showToastMessage("Review completed");
-    this.router.navigate(['']);
+    this.router.navigate(['tabs/tab2']);
   }
   
   buildPatientWithDoc(data, doc) {

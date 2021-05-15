@@ -33,34 +33,35 @@ export class Tab2Page {
   }
 
   setPageStateByRole(isloadSpinner) {
-    if(isloadSpinner)
-    this.service.showLoadingSpinner();
+    if (isloadSpinner)
+      this.service.showLoadingSpinner();
     this.appointments = [];
 
     this.isL1 = this.aservice.getUserRole() == 2 ? true : false;
     this.isL2 = this.aservice.getUserRole() == 3 ? true : false;
-    if (this.isL1)
-    {
+    if (this.isL1) {
       this.appointments = this.service.getL1Appointments();
-      
+
     }
     else if (this.isL2)
+    {
       this.appointments = this.service.getL2Appointments();
-      
-
+    }
+    this.appointmentsBackup = this.appointments;
   }
 
   async filterList(evt) {
     this.appointments = this.appointmentsBackup;
     const searchTerm = evt.srcElement.value;
-  
+
     if (!searchTerm) {
+      this.appointments = this.appointmentsBackup;
       return;
     }
-  console.log(searchTerm);
-    this.appointments = this.appointments.filter(appnt => appnt.PatientInfo.FirstName.toLowerCase().indexOf(searchTerm.toLowerCase()) > -1); 
+    console.log(searchTerm);
+    this.appointments = this.appointments.filter(appnt => appnt.PatientInfo.FirstName.toLowerCase().indexOf(searchTerm.toLowerCase()) > -1);
     console.log("filtered res ");
-  }  
+  }
 
 
   async LockAppointment(uid) {

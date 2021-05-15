@@ -38,7 +38,7 @@ export class ViewAppointmentPage implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.apptUID = this.aRouter.snapshot.paramMap.get('uid');    
+    this.apptUID = this.aRouter.snapshot.paramMap.get('uid');
     this.setRoles();
 
     this.service.getAppointmentId(this.apptUID).forEach(a => {
@@ -49,10 +49,9 @@ export class ViewAppointmentPage implements OnInit {
         this.AppointmentNotAvailable();
       }
       else {
-        if(this.appointment.LockedBy != this.service.getUserUID())
-        {
+        if (this.appointment.LockedBy != this.service.getUserUID()) {
           var userData = JSON.parse(localStorage.getItem('UserData'))
-          var userUID = userData.userInDB.uid;      
+          var userUID = userData.userInDB.uid;
           this.service.LockAppointment(this.apptUID, userUID);
         }
       }
@@ -78,7 +77,7 @@ export class ViewAppointmentPage implements OnInit {
     this.router.navigate(['tabs']);
   }
 
-  checkValidation(){
+  checkValidation() {
     console.log(this.appointment);
     this.Symptoms = (this.appointment.Symptoms != undefined && this.appointment.Symptoms.length > 0);
     this.Temparature = (this.appointment.Temparature != undefined && this.appointment.Temparature.length > 0)
@@ -96,25 +95,23 @@ export class ViewAppointmentPage implements OnInit {
 
   SendToDoctor() {
     this.isSubmitted = true;
-    if(this.checkValidation())
-    {
-    this.service.showLoadingSpinner();
-    this.service.sendToDoctor(this.appointment, this.aRouter.snapshot.paramMap.get('uid'));
-    this.service.showToastMessage("Appointment Sent to Doctor Successfully");
+    if (this.checkValidation()) {
+      this.service.showLoadingSpinner();
+      this.service.sendToDoctor(this.appointment, this.aRouter.snapshot.paramMap.get('uid'));
+      this.service.showToastMessage("Appointment Sent to Doctor Successfully");
     }
-    else
-    {
+    else {
       this.service.showToastMessage("Please Enter all mandatory fields");
-       return false;
+      return false;
     }
   }
 
-  NoConsultRequired(){
+  NoConsultRequired() {
     this.service.showLoadingSpinner();
     this.service.completeReview(this.appointment, this.aRouter.snapshot.paramMap.get('uid'));
     this.service.showToastMessage("Appointment closed without Doctor consultation");
   }
-  
+
   CompleteDoctorReview() {
     this.service.showLoadingSpinner();
     this.service.completeReview(this.appointment, this.aRouter.snapshot.paramMap.get('uid'));
@@ -129,7 +126,7 @@ export class ViewAppointmentPage implements OnInit {
   // const button = document.querySelector('ion-button');
   // button.addEventListener('click', createModal);
 
-  private currentModel =  {};
+  private currentModel = {};
   async createPrescriptionModal() {
     const modal = await this.modalController.create({
       component: QuickViewPrescriptionsPage,
@@ -143,7 +140,7 @@ export class ViewAppointmentPage implements OnInit {
     this.currentModel = modal;
   }
 
-  private currentPModel =  {};
+  private currentPModel = {};
   async createPatientModal() {
     const modal = await this.modalController.create({
       component: QuickViewPatientPage,

@@ -43,12 +43,12 @@ export class NewAppointmentPage implements OnInit {
   ngOnInit() {
     this.uid = this.aRouter.snapshot.paramMap.get('uid');
     this.isPatient = this.service.getUserRole() == null || this.service.getUserRole() == undefined || this.service.getUserRole() == 1;
-    var patientDoc = this.service.getPatientById(this.aRouter.snapshot.paramMap.get('uid')).forEach(a =>{
+    var patientDoc = this.service.getPatientById(this.uid).forEach(a => {
       this.patientInfo = a.data();
     });
   }
 
-  checkValidation(){
+  checkValidation() {
     console.log(this.appointment);
     this.Symptoms = (this.appointment.Symptoms != undefined && this.appointment.Symptoms.length > 0);
     this.Temparature = (this.appointment.Temparature != undefined && this.appointment.Temparature.length > 0)
@@ -64,39 +64,42 @@ export class NewAppointmentPage implements OnInit {
       && this.SleepSymptoms && this.OXIMeterReading);
   }
 
-  SaveAppointment(){
+  SaveAppointment() {
     this.isSubmitted = true;
-    if(this.checkValidation())
-    {
-    console.log(this.appointment);
-    this.service.showLoadingSpinner();
-    var userData = JSON.parse(localStorage.getItem('UserData'));
-    this.appointment.ReviewStatus = "ReadyForReview";
-    this.appointment.LockedBy = "";
-    this.appointment.AppointmentClosed = false;
-    this.appointment.PatientID = this.uid;
-    this.appointment.PatientName = this.patientInfo.FirstName + ", " + this.patientInfo.LastName;
-    this.appointment.PatientInfo = this.patientInfo;
-    this.appointment.SymptomDate  = new Date();
-    this.appointment.L1Reviewed = false;
-    this.appointment.L1ExplainedMedicine = false;
-    this.appointment.L2Reviewed = false;
-    this.appointment.DoctorPrescription = "";
-    this.appointment.RegisteredBy = userData.uid;
+    if (this.checkValidation()) {
+      console.log(this.appointment);
+      this.service.showLoadingSpinner();
+      var userData = JSON.parse(localStorage.getItem('UserData'));
+      this.appointment.ReviewStatus = "ReadyForReview";
+      this.appointment.LockedBy = "";
+      this.appointment.AppointmentClosed = false;
+      this.appointment.PatientID = this.uid;
+      this.appointment.PatientName = this.patientInfo.FirstName + ", " + this.patientInfo.LastName;
+      this.appointment.PatientInfo = this.patientInfo;
+      this.appointment.SymptomDate = new Date();
+      this.appointment.L1Reviewed = false;
+      this.appointment.L1ExplainedMedicine = false;
+      this.appointment.L2Reviewed = false;
+      this.appointment.DoctorPrescription = "";
+      this.appointment.RegisteredBy = userData.uid;
 
-    this.service.SaveAppointment(this.appointment);
-    this.service.showToastMessage("Your details are saved successfully.  A volunteer will contact you at the earliest to review and assign you to any available Doctor !!");
-    this.appointment = {};
-    this.router.navigate(['tabs']);
-  }
-  else
-  {
-    this.service.showToastMessage("Please Enter all mandatory fields");
-     return false;
-  }    
+      var hasActiveAppt = false;
+      if (!hasActiveAppt) {
+        this.service.SaveAppointment(this.appointment);
+        this.service.showToastMessage("Your details are saved successfully.  A volunteer will contact you at the earliest to review and assign you to any available Doctor !!");
+        this.appointment = {};
+        this.router.navigate(['tabs']);
+      }
+      else
+        this.service.showToastMessage("You already have one open appointment. You cannot request a duplicate appointment");
+    }
+    else {
+      this.service.showToastMessage("Please Enter all mandatory fields");
+      return false;
+    }
   }
 
-  goToHome(){
+  goToHome() {
     this.router.navigate(['tabs']);
   }
 }

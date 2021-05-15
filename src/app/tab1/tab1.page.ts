@@ -17,7 +17,8 @@ export class Tab1Page {
     private router: Router,
     private alertCtl: AlertController
     ) {
-      this.IntroMessage();
+      if(this.patientService.getUserRole() == 1)
+        this.IntroMessage();
     }
 
   ngOnChanges(){
@@ -49,6 +50,13 @@ export class Tab1Page {
     console.log(uid);
     //Pass route param
     this.router.navigate(['new-appointment', uid]);
+  }
+
+  EditPatient(uid)
+  {
+    console.log(uid);
+    //Pass route param
+    this.router.navigate(['add-patient', uid]);
   }
 
   viewPrescription(uid)
