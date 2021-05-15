@@ -61,6 +61,10 @@ const routes: Routes = [
   {
     path: 'back-office-reports',
     loadChildren: () => import('./back-office-reports/back-office-reports.module').then( m => m.BackOfficeReportsPageModule)
+  },
+  {
+    path: 'quick-view-patient',
+    loadChildren: () => import('./quick-view-patient/quick-view-patient.module').then( m => m.QuickViewPatientPageModule)
   }
 
 

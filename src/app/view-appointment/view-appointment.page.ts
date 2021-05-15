@@ -5,6 +5,7 @@ import { AuthenticationService } from "../shared/authentication.service";
 import { AlertController, ModalController } from '@ionic/angular';
 import { ViewPrescriptionPage } from '../view-prescription/view-prescription.page';
 import { QuickViewPrescriptionsPage } from '../quick-view-prescriptions/quick-view-prescriptions.page';
+import { QuickViewPatientPage } from '../quick-view-patient/quick-view-patient.page';
 
 @Component({
   selector: 'app-view-appointment',
@@ -129,7 +130,7 @@ export class ViewAppointmentPage implements OnInit {
   // button.addEventListener('click', createModal);
 
   private currentModel =  {};
-  async createModal() {
+  async createPrescriptionModal() {
     const modal = await this.modalController.create({
       component: QuickViewPrescriptionsPage,
       componentProps: {
@@ -140,5 +141,19 @@ export class ViewAppointmentPage implements OnInit {
 
     await modal.present();
     this.currentModel = modal;
+  }
+
+  private currentPModel =  {};
+  async createPatientModal() {
+    const modal = await this.modalController.create({
+      component: QuickViewPatientPage,
+      componentProps: {
+        'uid': this.appointment.PatientID,
+        'modalController': this.modalController
+      }
+    });
+
+    await modal.present();
+    this.currentPModel = modal;
   }
 }

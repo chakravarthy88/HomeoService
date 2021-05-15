@@ -1,0 +1,40 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="end">
+      <ion-button (click)="dismissModal()">Close</ion-button>
+    </ion-buttons>
+    <ion-title class="smallText" (click)="createModal()">View Patient</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-list>
+    <ion-item>
+      <ion-label>Patient Name: {{patient.FirstName}}, {{patient.LastName}}</ion-label>
+    </ion-item>
+    <ion-item>
+      <ion-label>Gender: {{patient.Gender}}</ion-label>
+    </ion-item>
+    <ion-item>
+      <ion-label>Age: {{patient.Age}}</ion-label>
+    </ion-item>
+    <ion-item>
+      <ion-label>Address: {{patient.Address}}</ion-label>
+    </ion-item>
+    <ion-item>
+      <ion-label>Mobile: {{patient.Mobile}}</ion-label>
+    </ion-item>
+    <ion-item>
+      <ion-label>Tagged Doctor: {{patient.TaggedDoctor}}</ion-label>
+    </ion-item>
+    <ion-item>
+      <ion-label>Tested Positive?: {{patient.TestedPositive}}</ion-label>
+    </ion-item>
+    <ion-item>
+      <ion-label>Tested Date: {{patient.TestedDate  | date:'d, MMM h:mm a'}}</ion-label>
+    </ion-item>
+    <ion-item>
+      <ion-label>Vaccinated: {{patient.Vaccinated}}</ion-label>
+    </ion-item>
+  </ion-list>
+</ion-content>
